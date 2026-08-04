@@ -1,3 +1,5 @@
+import logo from '../assets/nextparts-logo.png';
+
 const navLinks = [
   { label: 'Home', href: '#home' },
   { label: 'Acerca de nosotros', href: '#nosotros' },
@@ -8,22 +10,15 @@ const navLinks = [
 export default function NextPartsHero() {
   return (
     <section id="home" className="relative min-h-screen overflow-hidden">
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 z-0 h-full w-full object-cover"
-        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4"
-      />
+      <div className="lava-lamp-bg absolute inset-0 z-0">
+        <span className="lava-blob lava-blob-1" />
+        <span className="lava-blob lava-blob-2" />
+        <span className="lava-blob lava-blob-3" />
+        <span className="lava-blob lava-blob-4" />
+      </div>
 
       <nav className="relative z-10 mx-auto flex max-w-7xl flex-row items-center justify-between px-8 py-6">
-        <span
-          className="text-3xl tracking-tight text-foreground"
-          style={{ fontFamily: 'Inter, sans-serif' }}
-        >
-          <span className="font-bold">next</span> <span className="font-normal">parts</span>
-        </span>
+        <img src={logo} alt="Next Parts" className="h-11 w-11 rounded-xl" />
 
         <div className="hidden items-center gap-8 md:flex">
           {navLinks.map((link, i) => (
@@ -49,11 +44,14 @@ export default function NextPartsHero() {
         </a>
       </nav>
 
-      <div className="relative z-10 flex flex-col items-center px-6 pb-40 pt-32 text-center">
-        <h1
-          className="animate-fade-rise max-w-7xl text-5xl font-normal leading-[0.95] tracking-[-2.46px] sm:text-7xl md:text-8xl"
-          style={{ fontFamily: "'Instrument Serif', serif" }}
-        >
+      <div className="relative z-10 flex flex-col items-center px-6 pb-40 pt-20 text-center">
+        <img
+          src={logo}
+          alt="Next Parts"
+          className="animate-fade-rise h-28 w-28 rounded-3xl shadow-2xl sm:h-32 sm:w-32"
+        />
+
+        <h1 className="animate-fade-rise mt-10 max-w-7xl text-5xl font-bold leading-[0.95] tracking-[-2.46px] sm:text-7xl md:text-8xl">
           La nueva era del <em className="not-italic text-muted-foreground">abastecimiento de autopartes.</em>
         </h1>
 

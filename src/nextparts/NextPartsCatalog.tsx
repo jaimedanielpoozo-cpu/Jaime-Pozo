@@ -6,13 +6,12 @@ export default function NextPartsCatalog() {
       <FadeIn
         as="h2"
         y={40}
-        className="px-6 text-center text-4xl font-normal leading-none tracking-tight sm:text-6xl md:text-7xl"
-        style={{ fontFamily: "'Instrument Serif', serif" }}
+        className="px-6 text-center text-4xl font-bold leading-none tracking-tight sm:text-6xl md:text-7xl"
       >
         Catálog<em className="not-italic text-muted-foreground">o</em>
       </FadeIn>
 
-      <FadeIn delay={0.15} y={24} className="mt-10 h-screen w-full overflow-hidden">
+      <FadeIn delay={0.15} y={24} className="mt-10 h-[200vh] w-full overflow-hidden">
         <iframe
           src="/catalogo.html"
           title="Catálogo Next Parts"

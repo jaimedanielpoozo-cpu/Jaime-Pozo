@@ -14,8 +14,7 @@ export default function NextPartsAbout() {
         <FadeIn
           as="h2"
           y={40}
-          className="text-4xl font-normal leading-none tracking-tight sm:text-6xl md:text-7xl"
-          style={{ fontFamily: "'Instrument Serif', serif" }}
+          className="text-4xl font-bold leading-none tracking-tight sm:text-6xl md:text-7xl"
         >
           Acerca de <em className="not-italic text-muted-foreground">nosotros</em>
         </FadeIn>
@@ -37,14 +36,9 @@ export default function NextPartsAbout() {
               key={stat.label}
               delay={0.25 + i * 0.1}
               y={24}
-              className="liquid-glass rounded-2xl border border-border px-4 py-8"
+              className="liquid-glass rounded-2xl border border-border/15 px-4 py-8"
             >
-              <div
-                className="text-3xl font-normal sm:text-4xl"
-                style={{ fontFamily: "'Instrument Serif', serif" }}
-              >
-                {stat.value}
-              </div>
+              <div className="text-3xl font-bold sm:text-4xl">{stat.value}</div>
               <div className="mt-2 text-xs text-muted-foreground sm:text-sm">{stat.label}</div>
             </FadeIn>
           ))}

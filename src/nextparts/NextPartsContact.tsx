@@ -9,8 +9,7 @@ export default function NextPartsContact() {
       <FadeIn
         as="h2"
         y={40}
-        className="text-4xl font-normal leading-none tracking-tight sm:text-6xl md:text-7xl"
-        style={{ fontFamily: "'Instrument Serif', serif" }}
+        className="text-4xl font-bold leading-none tracking-tight sm:text-6xl md:text-7xl"
       >
         Contact<em className="not-italic text-muted-foreground">o</em>
       </FadeIn>
@@ -27,7 +26,7 @@ export default function NextPartsContact() {
       <FadeIn
         delay={0.3}
         y={24}
-        className="liquid-glass mt-12 flex w-full max-w-md flex-col gap-6 rounded-2xl border border-border px-8 py-10"
+        className="liquid-glass mt-12 flex w-full max-w-md flex-col gap-6 rounded-2xl border border-border/15 px-8 py-10"
       >
         <div>
           <div className="text-xs uppercase tracking-widest text-muted-foreground">Email</div>
@@ -38,7 +37,7 @@ export default function NextPartsContact() {
             info@nextparts.com.ar
           </a>
         </div>
-        <div className="h-px w-full bg-border" />
+        <div className="h-px w-full bg-border/15" />
         <div>
           <div className="text-xs uppercase tracking-widest text-muted-foreground">
             Horario de atención

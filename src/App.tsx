@@ -1,18 +1,15 @@
-import HeroSection from './sections/HeroSection';
-import MarqueeSection from './sections/MarqueeSection';
-import AboutSection from './sections/AboutSection';
-import ServicesSection from './sections/ServicesSection';
-import ProjectsSection from './sections/ProjectsSection';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import NextPartsLanding from './pages/NextPartsLanding';
+import JackPortfolio from './pages/JackPortfolio';
 
 function App() {
   return (
-    <div className="bg-[#0C0C0C]" style={{ overflowX: 'clip' }}>
-      <HeroSection />
-      <MarqueeSection />
-      <AboutSection />
-      <ServicesSection />
-      <ProjectsSection />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<NextPartsLanding />} />
+        <Route path="/jack" element={<JackPortfolio />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
