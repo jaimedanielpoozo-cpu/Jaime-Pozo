@@ -5,10 +5,10 @@ export default function NextPartsCatalog() {
     <section id="catalogo" className="bg-background pt-24 sm:pt-28">
       <FadeIn
         as="h2"
-        y={40}
-        className="px-6 text-center text-4xl font-bold leading-none tracking-tight sm:text-6xl md:text-7xl"
+        y={20}
+        className="px-6 text-center text-lg font-medium uppercase tracking-widest text-muted-foreground"
       >
-        Catálog<em className="not-italic text-muted-foreground">o</em>
+        Catálogo
       </FadeIn>
 
       <FadeIn delay={0.15} y={24} className="mt-10 h-[85vh] w-full">
