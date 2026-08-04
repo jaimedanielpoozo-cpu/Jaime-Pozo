@@ -57,45 +57,47 @@ html {
 .lava-lamp-bg {
   overflow: hidden;
   background: hsl(var(--background));
+  contain: strict;
 }
 .lava-blob {
   position: absolute;
   border-radius: 9999px;
-  filter: blur(70px);
-  opacity: 0.65;
+  filter: blur(45px);
+  opacity: 0.6;
   will-change: transform;
+  transform: translateZ(0);
 }
 .lava-blob-1 {
   top: -10%;
   left: -10%;
-  width: 45vw;
-  height: 45vw;
+  width: 32vw;
+  height: 32vw;
   background: radial-gradient(circle, #4361ee 0%, transparent 70%);
-  animation: lava-float-1 22s ease-in-out infinite alternate;
+  animation: lava-float-1 28s ease-in-out infinite alternate;
 }
 .lava-blob-2 {
   top: 30%;
   right: -15%;
-  width: 50vw;
-  height: 50vw;
+  width: 36vw;
+  height: 36vw;
   background: radial-gradient(circle, #012f9e 0%, transparent 70%);
-  animation: lava-float-2 26s ease-in-out infinite alternate;
+  animation: lava-float-2 32s ease-in-out infinite alternate;
 }
 .lava-blob-3 {
   bottom: -20%;
   left: 15%;
-  width: 40vw;
-  height: 40vw;
+  width: 28vw;
+  height: 28vw;
   background: radial-gradient(circle, #7699ff 0%, transparent 70%);
-  animation: lava-float-3 19s ease-in-out infinite alternate;
+  animation: lava-float-3 24s ease-in-out infinite alternate;
 }
 .lava-blob-4 {
   bottom: 10%;
   right: 20%;
-  width: 30vw;
-  height: 30vw;
+  width: 20vw;
+  height: 20vw;
   background: radial-gradient(circle, #aebddf 0%, transparent 70%);
-  animation: lava-float-4 24s ease-in-out infinite alternate;
+  animation: lava-float-4 30s ease-in-out infinite alternate;
 }
 
 @keyframes lava-float-1 {

@@ -48,10 +48,10 @@ export default function NextPartsHero() {
         <img
           src={logo}
           alt="Next Parts"
-          className="animate-fade-rise h-28 w-28 rounded-3xl shadow-2xl sm:h-32 sm:w-32"
+          className="animate-fade-rise h-40 w-40 rounded-[2rem] shadow-2xl sm:h-56 sm:w-56 md:h-64 md:w-64"
         />
 
-        <h1 className="animate-fade-rise mt-10 max-w-7xl text-5xl font-bold leading-[0.95] tracking-[-2.46px] sm:text-7xl md:text-8xl">
+        <h1 className="animate-fade-rise mt-12 max-w-7xl text-5xl font-bold leading-[0.95] tracking-[-2.46px] sm:text-7xl md:text-8xl">
           La nueva era del <em className="not-italic text-muted-foreground">abastecimiento de autopartes.</em>
         </h1>
 

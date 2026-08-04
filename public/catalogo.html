@@ -1342,6 +1342,19 @@
   .filterbar{ position:sticky; top:62px; z-index:45; box-shadow:var(--sh-sm); }
   #brandMenu{ display:flex; flex-wrap:wrap; gap:6px; padding:10px; min-width:260px; }
   #brandMenu .fbtn{ width:auto; }
+  .filterbar .searchwrap{ flex:1 1 420px; min-width:260px; max-width:640px; }
+  .filterbar .searchwrap #q{ width:100%; }
+
+  /* ---- Botón flotante "Volver arriba" del catálogo ---- */
+  #npBackTop{
+    position:fixed; right:20px; bottom:20px; z-index:70;
+    width:46px; height:46px; border-radius:50%; border:none;
+    background:var(--np-blue); color:#fff; font-size:18px; cursor:pointer;
+    box-shadow:var(--sh-lg); display:none; align-items:center; justify-content:center;
+    transition:transform .2s var(--ease), background .2s;
+  }
+  #npBackTop:hover{ background:var(--np-blue-dk); transform:translateY(-2px); }
+  #npBackTop.show{ display:flex; }
 
   /* ---- Scroll reveal (mismo espíritu que las animaciones de Jack 3D) ---- */
   .np-reveal{
@@ -1451,7 +1464,7 @@ function npMcBadge(){ return ''; }
   <div class="filterbar">
     <div class="cat-dropdown-wrap">
       <button class="cat-pill" id="brandPill" onclick="toggleMenu('brandMenu')">
-        &#128269; Filters<span class="dd-arrow">&#9660;</span>
+        &#128269; Marcas<span class="dd-arrow">&#9660;</span>
       </button>
       <div class="cat-menu cat-menu-brands" id="brandMenu">
     <button class="fbtn active" data-f="all">Todas las marcas <span class="b-count">743</span></button>
@@ -7234,7 +7247,7 @@ function toggleNuevos(){
   function selectAll(){
     [].slice.call(document.querySelectorAll('table.parts tbody tr'))
       .filter(function(r){return r.style.display!=='none';})
-      .forEach(function(tr){SELECTED.add(tr.dataset.marca+'|'+tr.dataset.oem);});
+      .forEach(function(tr){SELECTED.add(tr.dataset.marca+'|'+tr.dataset.oem+'|'+(tr.dataset.octosis||''));});
     updateSelUI();
   }
   function deselectAll(){ SELECTED.clear(); updateSelUI(); }
@@ -7244,13 +7257,13 @@ function toggleNuevos(){
     var visN=[].slice.call(document.querySelectorAll('table.parts tbody tr')).filter(function(r){return r.style.display!=='none';}).length;
     // row highlights
     document.querySelectorAll('table.parts tbody tr').forEach(function(tr){
-      var key=tr.dataset.marca+'|'+tr.dataset.oem;
+      var key=tr.dataset.marca+'|'+tr.dataset.oem+'|'+(tr.dataset.octosis||'');
       tr.classList.toggle('sel-row',SELECTED.has(key));
       var rchk=tr.querySelector('.row-chk'); if(rchk){ rchk.style.color=SELECTED.has(key)?'#fff':'transparent'; }
     });
     // card highlights
     document.querySelectorAll('.card').forEach(function(c){
-      var key=c.dataset.marca+'|'+c.dataset.oem;
+      var key=c.dataset.marca+'|'+c.dataset.oem+'|'+(c.dataset.octosis||'');
       c.classList.toggle('sel-card',SELECTED.has(key));
       var chk=c.querySelector('.card-chk'); if(chk) chk.classList.toggle('on',SELECTED.has(key));
     });
@@ -7329,7 +7342,7 @@ function toggleNuevos(){
         const priceHtml = (d.price && d.price!=='Consultar')
           ? `<span class="usd">${d.price}</span>`+(d.mayor?`<span class="ars">${d.mayor}</span>`:'')
           : `<span class="consult">Consultar</span>`;
-        h+=`<div class="card ${SELECTED.has(rowKey(d))?'sel-card':''}" data-oem="${d.oem}" data-marca="${d.marca}" ondblclick="openProfileByKey('${d.marca}|${d.oem}|${d.octosis||''}')">
+        h+=`<div class="card ${SELECTED.has(rowKey(d))?'sel-card':''}" data-oem="${d.oem}" data-marca="${d.marca}" data-octosis="${d.octosis||''}" ondblclick="openProfileByKey('${d.marca}|${d.oem}|${d.octosis||''}')">
           <button class="card-chk ${SELECTED.has(rowKey(d))?'on':''}" onclick="event.stopPropagation();toggleSelect('${d.marca}|${d.oem}|${d.octosis||''}')">&#10003;</button>
           <div class="card-img">${npSello(d.marca)}${src?`<img loading="lazy" decoding="async" src="${src}">`:'<span class="noimg">s/foto</span>'}</div>
           <div class="card-body">
@@ -9584,6 +9597,15 @@ function npMcInline(marcaComercial){
       io.observe(el);
     });
   }
+})();
+</script>
+<button id="npBackTop" title="Volver arriba" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+<script>
+(function(){
+  var btn = document.getElementById('npBackTop');
+  window.addEventListener('scroll', function(){
+    btn.classList.toggle('show', window.scrollY > 600);
+  }, { passive:true });
 })();
 </script>
 </body></html>

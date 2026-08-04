@@ -11,7 +11,7 @@ export default function NextPartsCatalog() {
         Catálog<em className="not-italic text-muted-foreground">o</em>
       </FadeIn>
 
-      <FadeIn delay={0.15} y={24} className="mt-10 h-[200vh] w-full overflow-hidden">
+      <FadeIn delay={0.15} y={24} className="mt-10 h-[85vh] w-full">
         <iframe
           src="/catalogo.html"
           title="Catálogo Next Parts"
