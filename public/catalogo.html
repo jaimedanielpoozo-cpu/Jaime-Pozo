@@ -1341,11 +1341,53 @@
 
   /* ---- Filtros: barra siempre visible; la marca vive en su propio desplegable ---- */
   .filterbar{ position:sticky; top:var(--np-tb-h,62px); z-index:45; box-shadow:var(--sh-sm); }
-  #brandMenu{ display:flex; flex-wrap:wrap; gap:6px; padding:10px; min-width:260px; }
+  #brandMenu.open{ display:flex; flex-wrap:wrap; gap:6px; padding:10px; min-width:260px; }
   #brandMenu .fbtn{ width:auto; }
   .filterbar .searchwrap{ flex:1 1 600px; min-width:260px; max-width:none; order:5; }
   .filterbar .view-toggle{ order:6; }
   .filterbar .searchwrap #q{ width:100%; }
+
+  /* ---- Liquid glass: la barra de filtros pasa a vidrio esmerilado azul ---- */
+  .filterbar{
+    background:linear-gradient(135deg, rgba(1,47,158,.82), rgba(1,33,110,.78));
+    -webkit-backdrop-filter:blur(20px) saturate(180%);
+    backdrop-filter:blur(20px) saturate(180%);
+    border-bottom:1px solid rgba(255,255,255,.16);
+    box-shadow:0 10px 30px rgba(1,47,158,.20), inset 0 1px 0 rgba(255,255,255,.08);
+  }
+  .cat-pill{
+    background:rgba(255,255,255,.12);
+    border-color:rgba(255,255,255,.28);
+    color:#fff;
+  }
+  .cat-pill:hover{
+    background:rgba(255,255,255,.22);
+    border-color:rgba(255,255,255,.45);
+    color:#fff;
+    box-shadow:0 8px 20px rgba(0,0,0,.18);
+  }
+  .cat-pill.on{
+    background:#fff;
+    border-color:#fff;
+    color:var(--np-blue);
+    box-shadow:0 6px 18px rgba(0,0,0,.18);
+  }
+  .filterbar .searchwrap input, .filterbar #q{
+    background:rgba(255,255,255,.14) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23AEBDDF' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E") no-repeat 17px center;
+    border-color:rgba(255,255,255,.3);
+    color:#fff;
+    -webkit-backdrop-filter:blur(6px);
+    backdrop-filter:blur(6px);
+  }
+  .filterbar .searchwrap input::placeholder{ color:rgba(255,255,255,.65); }
+  .filterbar .searchwrap input:focus{
+    border-color:#fff;
+    box-shadow:0 0 0 4px rgba(255,255,255,.18);
+    background-color:rgba(255,255,255,.22);
+  }
+  .filterbar .view-toggle{ border-color:rgba(255,255,255,.35); }
+  .filterbar .view-toggle button{ background:transparent; color:#fff; }
+  .filterbar .view-toggle button.on{ background:#fff; color:var(--np-blue); }
 
   /* ---- Botón flotante "Volver arriba" del catálogo ---- */
   #npBackTop{
@@ -1513,7 +1555,7 @@ function npMcBadge(){ return ''; }
         </div>
       </div>
     <button class="cat-pill" id="printCatBtn" onclick="openPrintCatModal()">🖨️ Imprimir catálogo</button>
-    <div class="searchwrap"><input id="q" type="search" placeholder="🔍 Buscar OEM, cód. fabricante, descripción o nro. equivalente..."></div>
+    <div class="searchwrap"><input id="q" type="search" placeholder="Buscar OEM, cód. fabricante, descripción o nro. equivalente..."></div>
     <div class="view-toggle"><button id="vCards" class="on" onclick="setView('cards')">🔲 Tarjetas</button><button id="vList" onclick="setView('list')">☰ Lista</button></div>
   </div>
     <!-- Gmail selection bar -->
