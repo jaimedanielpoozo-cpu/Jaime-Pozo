@@ -138,7 +138,7 @@ html {
   }
 }
 
-/* ── Cluster de logos de marcas alrededor del logo central ── */
+/* ── Chip de logo de marca (usado en "Acerca de nosotros") ── */
 .brand-chip {
   display: flex;
   align-items: center;
@@ -157,30 +157,6 @@ html {
   width: 100%;
   height: 100%;
   object-fit: contain;
-}
-
-@keyframes brand-float-1 {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-12px) rotate(-4deg); }
-}
-@keyframes brand-float-2 {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(10px) rotate(3deg); }
-}
-@keyframes brand-float-3 {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-9px) rotate(3deg); }
-}
-@keyframes brand-float-4 {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(11px) rotate(-4deg); }
-}
-.brand-float-1 { animation: brand-float-1 6s ease-in-out infinite; }
-.brand-float-2 { animation: brand-float-2 7s ease-in-out infinite 0.3s; }
-.brand-float-3 { animation: brand-float-3 6.5s ease-in-out infinite 0.6s; }
-.brand-float-4 { animation: brand-float-4 7.5s ease-in-out infinite 0.9s; }
-@media (prefers-reduced-motion: reduce) {
-  .brand-float-1, .brand-float-2, .brand-float-3, .brand-float-4 { animation: none; }
 }
 
 @keyframes fade-rise {

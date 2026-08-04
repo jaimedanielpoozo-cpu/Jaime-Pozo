@@ -1,10 +1,21 @@
 import FadeIn from '../components/FadeIn';
+import ivecoLogo from '../assets/brands/iveco.png';
+import mercedesLogo from '../assets/brands/mercedes.png';
+import scaniaLogo from '../assets/brands/scania.png';
+import volvoLogo from '../assets/brands/volvo.png';
 
 const stats = [
   { value: '768+', label: 'Piezas en catálogo' },
   { value: '4', label: 'Marcas: Mercedes-Benz, Iveco, Scania, Volvo' },
   { value: 'USD', label: 'Precios en dólares' },
   { value: '24/7', label: 'Stock en tiempo real' },
+];
+
+const brands = [
+  { name: 'Mercedes-Benz', src: mercedesLogo },
+  { name: 'Iveco', src: ivecoLogo },
+  { name: 'Scania', src: scaniaLogo },
+  { name: 'Volvo', src: volvoLogo },
 ];
 
 export default function NextPartsAbout() {
@@ -40,6 +51,19 @@ export default function NextPartsAbout() {
             >
               <div className="text-3xl font-bold sm:text-4xl">{stat.value}</div>
               <div className="mt-2 text-xs text-muted-foreground sm:text-sm">{stat.label}</div>
+            </FadeIn>
+          ))}
+        </div>
+
+        <div className="mt-8 flex w-full flex-wrap items-center justify-center gap-4 sm:gap-5">
+          {brands.map((brand, i) => (
+            <FadeIn
+              key={brand.name}
+              delay={0.55 + i * 0.08}
+              y={16}
+              className="brand-chip flex h-16 w-24 items-center justify-center p-3 sm:h-20 sm:w-28 sm:p-4"
+            >
+              <img src={brand.src} alt={brand.name} className="h-full w-full object-contain" />
             </FadeIn>
           ))}
         </div>

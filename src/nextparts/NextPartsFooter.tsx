@@ -1,8 +1,9 @@
 import logo from '../assets/nextparts-logo.png';
+import FadeIn from '../components/FadeIn';
 
 export default function NextPartsFooter() {
   return (
-    <footer className="border-t border-border/15 bg-background px-6 py-6 sm:px-10">
+    <FadeIn as="footer" y={24} className="border-t border-border/15 bg-background px-6 py-6 sm:px-10">
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
         <div className="flex items-center gap-3">
           <img src={logo} alt="Next Parts" className="h-8 w-8 rounded-lg" />
@@ -35,6 +36,6 @@ export default function NextPartsFooter() {
       <div className="mx-auto mt-4 max-w-7xl border-t border-border/15 pt-3 text-center text-[11px] text-muted-foreground">
         © {new Date().getFullYear()} Next Parts. Todos los derechos reservados.
       </div>
-    </footer>
+    </FadeIn>
   );
 }
