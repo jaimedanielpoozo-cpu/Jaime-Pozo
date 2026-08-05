@@ -143,9 +143,9 @@
   .noresults { text-align:center; color:var(--np-grey); padding:48px; font-size:15px; display:none; }
   footer { background:linear-gradient(180deg,var(--np-blue),var(--np-blue-dk)); color:var(--np-blue-soft); text-align:center; padding:14px 26px; font-size:11px; margin-top:28px; border-top:2px solid rgba(255,255,255,.08); }
   footer a:hover{ color:#fff; }
-  #npPrivacyOverlay{ display:none; position:fixed; inset:0; z-index:9995; background:rgba(10,18,42,.55); align-items:center; justify-content:center; padding:20px; }
-  #npPrivacyOverlay.show{ display:flex; }
-  #npPrivacyModal{ background:#fff; border-radius:16px; width:100%; max-width:480px; max-height:80vh; overflow-y:auto; box-shadow:0 24px 64px rgba(0,0,0,.4); }
+  #npPrivacyOverlay, #npLegalOverlay{ display:none; position:fixed; inset:0; z-index:9995; background:rgba(10,18,42,.55); align-items:center; justify-content:center; padding:20px; }
+  #npPrivacyOverlay.show, #npLegalOverlay.show{ display:flex; }
+  #npPrivacyModal, #npLegalModal{ background:#fff; border-radius:16px; width:100%; max-width:480px; max-height:80vh; overflow-y:auto; box-shadow:0 24px 64px rgba(0,0,0,.4); }
   .np-priv-head{ display:flex; align-items:center; justify-content:space-between; padding:18px 22px; border-bottom:1px solid var(--np-line); color:var(--np-ink); font-size:16px; position:sticky; top:0; background:#fff; }
   .np-priv-head button{ border:none; background:none; font-size:22px; line-height:1; color:#94A3B8; cursor:pointer; padding:0 4px; }
   .np-priv-head button:hover{ color:var(--np-ink); }
@@ -7088,7 +7088,7 @@ S R G P
       </tr>
       </tbody></table></div>
   </section>
-  <footer><b>next parts</b> · Catálogo mayorista para distribuidores · Precios en USD sujetos a tipo de cambio BNA (referencia $ 1490 / US$) · <a href="#" onclick="event.preventDefault();openPrivacyModal()" style="color:inherit;text-decoration:underline">Política de privacidad</a></footer>
+  <footer><b>next parts</b> · Catálogo mayorista para distribuidores · Precios en USD sujetos a tipo de cambio BNA (referencia $ 1490 / US$) · &copy; 2026 Todos los derechos reservados. · <a href="#" onclick="event.preventDefault();openPrivacyModal()" style="color:inherit;text-decoration:underline">Política de privacidad</a> · <a href="#" onclick="event.preventDefault();openLegalModal()" style="color:inherit;text-decoration:underline">Aviso legal</a></footer>
   <div id="npPrivacyOverlay" onclick="if(event.target===this)closePrivacyModal()">
     <div id="npPrivacyModal">
       <div class="np-priv-head"><b>Política de privacidad</b><button onclick="closePrivacyModal()" aria-label="Cerrar">&times;</button></div>
@@ -7097,6 +7097,18 @@ S R G P
         <p>Usamos esa información para gestionar tu acceso, procesar cotizaciones y comunicarnos sobre stock y precios. No vendemos ni compartimos tus datos con terceros ajenos a la operación comercial.</p>
         <p>El catálogo utiliza cookies técnicas para mantener tu sesión iniciada. No se emplean cookies de seguimiento publicitario.</p>
         <p>Podés solicitar la eliminación de tus datos en cualquier momento escribiendo a <a href="mailto:info@nextparts.com.ar" style="color:var(--np-blue)">info@nextparts.com.ar</a>.</p>
+      </div>
+    </div>
+  </div>
+  <div id="npLegalOverlay" onclick="if(event.target===this)closeLegalModal()">
+    <div id="npLegalModal">
+      <div class="np-priv-head"><b>Aviso legal</b><button onclick="closeLegalModal()" aria-label="Cerrar">&times;</button></div>
+      <div class="np-priv-body">
+        <p>next parts es un catálogo mayorista de repuestos para camiones Mercedes-Benz, Iveco, Scania y Volvo, destinado a talleres, casas de repuestos y empresas de flotas.</p>
+        <p>Los precios y el stock exhibidos están sujetos a variación sin previo aviso y al tipo de cambio de referencia indicado en cada edición del catálogo. La información se ofrece a título orientativo y no constituye una oferta vinculante hasta su confirmación por parte de next parts.</p>
+        <p>Las marcas, logos y nombres comerciales de terceros mencionados en el catálogo (Mercedes-Benz, Iveco, Scania, Volvo, entre otros) se utilizan únicamente con fines de identificación de compatibilidad de piezas y pertenecen a sus respectivos titulares.</p>
+        <p>El acceso a la lista mayorista y a los precios requiere una cuenta autorizada. next parts se reserva el derecho de admisión y de suspender cuentas ante un uso indebido de la plataforma.</p>
+        <p>Para consultas sobre este aviso legal, escribinos a <a href="mailto:info@nextparts.com.ar" style="color:var(--np-blue)">info@nextparts.com.ar</a>.</p>
       </div>
     </div>
   </div>
@@ -7206,6 +7218,14 @@ function toggleNuevos(){
   }
   function closePrivacyModal(){
     var o=document.getElementById('npPrivacyOverlay');
+    if(o) o.classList.remove('show');
+  }
+  function openLegalModal(){
+    var o=document.getElementById('npLegalOverlay');
+    if(o) o.classList.add('show');
+  }
+  function closeLegalModal(){
+    var o=document.getElementById('npLegalOverlay');
     if(o) o.classList.remove('show');
   }
   function toggleIndexPanel(){
@@ -9752,6 +9772,20 @@ function npMcInline(marcaComercial){
     }
     window.addEventListener('scroll', checkFooter, {passive:true});
   }
+  // ---- Avisar al padre (landing) si llegamos al final real del catálogo ----
+  var _npAtBottom = null;
+  function checkCatalogBottom(){
+    var doc = document.documentElement;
+    var atBottom = (window.scrollY + window.innerHeight) >= (doc.scrollHeight - 40);
+    if(atBottom !== _npAtBottom){
+      _npAtBottom = atBottom;
+      try{ window.parent.postMessage({type:'np-catalog-bottom', atBottom:atBottom}, '*'); }catch(e){}
+    }
+  }
+  window.addEventListener('scroll', checkCatalogBottom, {passive:true});
+  window.addEventListener('resize', checkCatalogBottom);
+  setTimeout(checkCatalogBottom, 300);
+  setTimeout(checkCatalogBottom, 1200);
 })();
 </script>
 <button id="npBackTop" title="Volver arriba" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
