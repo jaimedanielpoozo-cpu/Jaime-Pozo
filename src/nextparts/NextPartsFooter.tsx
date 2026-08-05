@@ -16,7 +16,7 @@ export default function NextPartsFooter({ visible }: { visible: boolean }) {
 
         <div className="flex items-center gap-3 sm:gap-5">
           <a href="mailto:info@nextparts.com.ar" className="hover:text-foreground">
-            info@nextparts.com.ar
+            info@nextparts.com.ar - © 2026 Todos los derechos reservados.
           </a>
           <span className="hidden sm:inline">·</span>
           <span className="hidden sm:inline">Lun a vie 8–18 hs</span>
