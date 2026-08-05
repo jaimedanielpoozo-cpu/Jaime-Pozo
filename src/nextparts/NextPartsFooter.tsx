@@ -1,41 +1,40 @@
+import { Link } from 'react-router-dom';
 import logo from '../assets/nextparts-logo.png';
-import FadeIn from '../components/FadeIn';
 
-export default function NextPartsFooter() {
+export default function NextPartsFooter({ visible }: { visible: boolean }) {
   return (
-    <FadeIn as="footer" y={24} className="border-t border-border/15 bg-background px-6 py-6 sm:px-10">
-      <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
-        <div className="flex items-center gap-3">
-          <img src={logo} alt="Next Parts" className="h-8 w-8 rounded-lg" />
-          <p className="max-w-xs text-xs text-muted-foreground">
-            Mayorista de repuestos para camiones Mercedes-Benz, Iveco, Scania y Volvo.
-          </p>
+    <footer
+      className={`overflow-hidden border-t border-border/15 bg-background transition-[max-height,opacity] duration-500 ease-out ${
+        visible ? 'max-h-20 opacity-100' : 'max-h-0 opacity-0'
+      }`}
+    >
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-2.5 text-xs text-muted-foreground sm:px-10">
+        <div className="flex items-center gap-2">
+          <img src={logo} alt="Next Parts" className="h-5 w-5 rounded-md" />
+          <span className="hidden sm:inline">Mayorista de repuestos para camiones.</span>
         </div>
 
-        <div className="flex flex-col gap-1 text-xs text-muted-foreground sm:flex-row sm:items-center sm:gap-4">
+        <div className="flex items-center gap-3 sm:gap-5">
           <a href="mailto:info@nextparts.com.ar" className="hover:text-foreground">
             info@nextparts.com.ar
           </a>
           <span className="hidden sm:inline">·</span>
-          <span>Lun a vie de 8 a 18 hs</span>
-        </div>
-
-        <div className="flex items-center gap-4 text-xs text-muted-foreground">
+          <span className="hidden sm:inline">Lun a vie 8–18 hs</span>
           <a href="#nosotros" className="hover:text-foreground">
-            Acerca de nosotros
-          </a>
-          <a href="#catalogo" className="hover:text-foreground">
-            Catálogo
+            Nosotros
           </a>
           <a href="#contacto" className="hover:text-foreground">
             Contacto
           </a>
+          <Link to="/politica-de-privacidad" className="hover:text-foreground">
+            Política de Privacidad
+          </Link>
         </div>
-      </div>
 
-      <div className="mx-auto mt-4 max-w-7xl border-t border-border/15 pt-3 text-center text-[11px] text-muted-foreground">
-        © {new Date().getFullYear()} Next Parts. Todos los derechos reservados.
+        <span className="hidden text-[10px] sm:inline">
+          © {new Date().getFullYear()} Next Parts
+        </span>
       </div>
-    </FadeIn>
+    </footer>
   );
 }
