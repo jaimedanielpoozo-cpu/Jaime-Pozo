@@ -67,7 +67,10 @@
 
   /* ===== INDEX ===== */
   .index { padding:42px 40px 10px; }
-  .index h2 { color:var(--np-ink); font-size:25px; font-weight:800; letter-spacing:-.3px; }
+  .index h2 {   color: #fff;
+    font-size:25px;
+    font-weight:800;
+    letter-spacing:-.3px; }
   .index .note { color:var(--np-grey); font-size:13px; margin:7px 0 22px; }
   table.idx { width:100%; border-collapse:separate; border-spacing:0; max-width:640px; border-radius:14px; overflow:hidden;
     box-shadow:var(--sh-md), 0 0 0 1px var(--np-line); }
@@ -135,7 +138,7 @@
   .usd { font-weight:900; color:var(--np-blue); font-size:16px; font-variant-numeric:tabular-nums; letter-spacing:-.3px; }
   .consult { font-weight:700; color:#7A88AE; font-size:13px; }
   .noresults { text-align:center; color:var(--np-grey); padding:48px; font-size:15px; display:none; }
-  footer { background:linear-gradient(180deg,var(--np-blue),var(--np-blue-dk)); color:var(--np-blue-soft); text-align:center; padding:14px 26px; font-size:11px; margin-top:28px; border-top:2px solid rgba(255,255,255,.08); }
+  footer { background:linear-gradient(180deg,var(--np-blue),var(--np-blue-dk)); color:var(--np-blue-soft); text-align:center; padding:32px 26px; font-size:12px; margin-top:52px; border-top:3px solid rgba(255,255,255,.08); }
   footer b { color:#fff; }
 
   /* ===== PROFILE VIEW ===== */
@@ -1134,16 +1137,17 @@
   body.np-gated .wrap,
   body.np-gated footer,
   body.np-gated #cartFab { opacity:0; pointer-events:none; visibility:hidden; }
-  /* al entrar la animación, ya habilitar el catálogo detrás (footer excluido: usa np-reveal) */
+  /* al entrar la animación, ya habilitar el catálogo detrás */
   body.np-unveil .topbar,
   body.np-unveil .filterbar,
   body.np-unveil .wrap,
+  body.np-unveil footer,
   body.np-unveil #cartFab { visibility:visible; pointer-events:auto; }
-  body.np-unveil footer { visibility:visible; pointer-events:auto; }
 
   body.np-unveil .topbar,
   body.np-unveil .filterbar,
   body.np-unveil .wrap,
+  body.np-unveil footer,
   body.np-unveil #cartFab {
     visibility:visible; pointer-events:auto;
     animation:catFadeIn .65s cubic-bezier(.22,.68,0,1) forwards;
@@ -9166,13 +9170,11 @@ document.addEventListener('DOMContentLoaded', function(){
         document.body.classList.remove('np-unveil');
         document.body.classList.remove('np-gated');
         try{ window.parent.postMessage({type:'np-gate',visible:false},'*'); }catch(e){}
-        /* forzar visibilidad y clicabilidad de todo el catálogo (footer excluido: usa np-reveal) */
-        ['.topbar','.filterbar','.wrap','#cartFab'].forEach(function(sel){
+        /* forzar visibilidad y clicabilidad de todo el catálogo */
+        ['.topbar','.filterbar','.wrap','footer','#cartFab'].forEach(function(sel){
           var el=document.querySelector(sel);
           if(el){ el.style.opacity='1'; el.style.pointerEvents=''; }
         });
-        var ft=document.querySelector('footer');
-        if(ft){ ft.style.opacity=''; ft.style.pointerEvents=''; }
         /* quitar pointer-events del portal definitivamente */
         g.style.zIndex='-1';
       }, 1050);
@@ -9648,8 +9650,8 @@ function npMcInline(marcaComercial){
     if(head) head.setAttribute('aria-expanded', open ? 'true' : 'false');
   };
 
-  // ---- Scroll reveal para marcas ----
-  var brandTargets = document.querySelectorAll('.brand');
+  // ---- Scroll reveal (mismo espíritu que las animaciones de Jack 3D) ----
+  var targets = document.querySelectorAll('.brand, footer');
   if('IntersectionObserver' in window){
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
@@ -9659,27 +9661,11 @@ function npMcInline(marcaComercial){
         }
       });
     }, { threshold:0, rootMargin:'0px 0px -10% 0px' });
-    brandTargets.forEach(function(el, i){
+    targets.forEach(function(el, i){
       el.classList.add('np-reveal');
       el.style.transitionDelay = Math.min(i, 4) * 60 + 'ms';
       io.observe(el);
     });
-  }
-  // ---- Footer: aparece solo cuando entra al viewport ----
-  var ft = document.querySelector('footer');
-  if(ft){
-    ft.classList.add('np-reveal');
-    var footerRevealed = false;
-    function checkFooter(){
-      if(footerRevealed) return;
-      var rect = ft.getBoundingClientRect();
-      if(rect.top < window.innerHeight + 80){
-        ft.classList.add('np-in');
-        footerRevealed = true;
-        window.removeEventListener('scroll', checkFooter);
-      }
-    }
-    window.addEventListener('scroll', checkFooter, {passive:true});
   }
 })();
 </script>
