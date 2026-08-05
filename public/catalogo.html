@@ -60,17 +60,20 @@
 
   /* ===== TOPBAR ===== */
   .topbar { position:sticky; top:0; z-index:50; background:var(--np-blue);
-    color:#fff; display:flex; align-items:center; justify-content:space-between; padding:0px 26px;
-    box-shadow:0 4px 16px rgba(1,33,110,.25); }
-  .topbar img { height:62px; }
-  .topbar .tagline { text-align:right; font-size:11px; color:var(--np-blue-soft); line-height:1.55; letter-spacing:.2px; }
+    color:#fff; display:flex; align-items:center; justify-content:space-between; padding:9px 26px;
+    box-shadow:0 2px 10px rgba(1,33,110,.14); }
+  .topbar img { height:40px; }
+  .topbar .tagline { text-align:right; font-size:10.5px; font-weight:400; color:var(--np-blue-soft); line-height:1.5; letter-spacing:.2px; }
 
   /* ===== INDEX ===== */
   .index { padding:42px 40px 10px; }
-  .index h2 {   color: #fff;
-    font-size:25px;
-    font-weight:800;
-    letter-spacing:-.3px; }
+  /* "Actualizar ahora" + estado siempre visible, pegado bajo el topbar */
+  #liveSyncBar{
+    position:sticky; top:var(--np-tb-h,62px); z-index:46;
+    background:#fff; padding:8px 40px; border-bottom:1px solid var(--np-line);
+    box-shadow:0 2px 8px rgba(20,52,118,.04);
+  }
+  .index h2 { color:var(--np-ink); font-size:25px; font-weight:800; letter-spacing:-.3px; }
   .index .note { color:var(--np-grey); font-size:13px; margin:7px 0 22px; }
   table.idx { width:100%; border-collapse:separate; border-spacing:0; max-width:640px; border-radius:14px; overflow:hidden;
     box-shadow:var(--sh-md), 0 0 0 1px var(--np-line); }
@@ -138,7 +141,17 @@
   .usd { font-weight:900; color:var(--np-blue); font-size:16px; font-variant-numeric:tabular-nums; letter-spacing:-.3px; }
   .consult { font-weight:700; color:#7A88AE; font-size:13px; }
   .noresults { text-align:center; color:var(--np-grey); padding:48px; font-size:15px; display:none; }
-  footer { background:linear-gradient(180deg,var(--np-blue),var(--np-blue-dk)); color:var(--np-blue-soft); text-align:center; padding:32px 26px; font-size:12px; margin-top:52px; border-top:3px solid rgba(255,255,255,.08); }
+  footer { background:linear-gradient(180deg,var(--np-blue),var(--np-blue-dk)); color:var(--np-blue-soft); text-align:center; padding:14px 26px; font-size:11px; margin-top:28px; border-top:2px solid rgba(255,255,255,.08); }
+  footer a:hover{ color:#fff; }
+  #npPrivacyOverlay{ display:none; position:fixed; inset:0; z-index:9995; background:rgba(10,18,42,.55); align-items:center; justify-content:center; padding:20px; }
+  #npPrivacyOverlay.show{ display:flex; }
+  #npPrivacyModal{ background:#fff; border-radius:16px; width:100%; max-width:480px; max-height:80vh; overflow-y:auto; box-shadow:0 24px 64px rgba(0,0,0,.4); }
+  .np-priv-head{ display:flex; align-items:center; justify-content:space-between; padding:18px 22px; border-bottom:1px solid var(--np-line); color:var(--np-ink); font-size:16px; position:sticky; top:0; background:#fff; }
+  .np-priv-head button{ border:none; background:none; font-size:22px; line-height:1; color:#94A3B8; cursor:pointer; padding:0 4px; }
+  .np-priv-head button:hover{ color:var(--np-ink); }
+  .np-priv-body{ padding:20px 22px; font-size:13.5px; line-height:1.65; color:var(--np-grey); }
+  .np-priv-body p{ margin:0 0 12px; }
+  .np-priv-body p:last-child{ margin-bottom:0; }
   footer b { color:#fff; }
 
   /* ===== PROFILE VIEW ===== */
@@ -248,9 +261,10 @@
 
     /* ── Filterbar: scroll horizontal + sticky corregido para mobile ── */
     .topbar { position:sticky !important; top:0 !important; }
+    #liveSyncBar { position:sticky !important; top:var(--np-tb-h,50px) !important; z-index:41 !important; }
     .filterbar { padding:6px 14px; flex-wrap:nowrap; overflow-x:auto;
       -webkit-overflow-scrolling:touch; gap:6px;
-      position:sticky !important; top:50px !important; z-index:40 !important; }
+      position:sticky !important; top:var(--np-fb-top,94px) !important; z-index:40 !important; }
     .filterbar::-webkit-scrollbar { display:none; }
     .fbtn, .view-toggle button, .adv-select { white-space:nowrap; flex-shrink:0; }
     .searchwrap { min-width:180px; }
@@ -667,13 +681,14 @@
 
     #cartFab { bottom:calc(14px + env(safe-area-inset-bottom, 0px)); }
     .cart-foot { padding-bottom:calc(18px + env(safe-area-inset-bottom, 0px)); }
-    footer { padding-bottom:calc(32px + env(safe-area-inset-bottom, 0px)); }
+    footer { padding-bottom:calc(14px + env(safe-area-inset-bottom, 0px)); }
 
     .pf-top { padding:10px 14px; }
     .pf-imgbox { height:300px; }
     .pf-imgbox img.zoomed { transform:scale(1.35); }
 
-    .index { overflow-x:auto; -webkit-overflow-scrolling:touch; padding:20px 12px; }
+    .index { padding:20px 12px; }
+    .idx-panel { overflow-x:auto; -webkit-overflow-scrolling:touch; }
     table.idx { min-width:430px; }
 
     .stats > div { padding:18px 14px; border-right:none; border-bottom:1px solid rgba(255,255,255,.12); }
@@ -859,13 +874,13 @@
   
   /* ══════════ LOGIN MAYORISTA v28.1 ══════════ */
   #npLoginBtn{
-    background:rgba(255,255,255,.14);color:#fff;
-    border:1.5px solid rgba(255,255,255,.35);border-radius:24px;
-    padding:9px 20px;font-size:14px;font-weight:700;cursor:pointer;
+    background:rgba(255,255,255,.1);color:#fff;
+    border:1px solid rgba(255,255,255,.3);border-radius:20px;
+    padding:7px 16px;font-size:12.5px;font-weight:600;cursor:pointer;
     white-space:nowrap;flex-shrink:0;transition:background .15s;
     font-family:inherit;
   }
-  #npLoginBtn:hover{background:rgba(255,255,255,.24)}
+  #npLoginBtn:hover{background:rgba(255,255,255,.2)}
 
   /* ── Nombre usuario en topbar v33.1 ── */
   #npUserName{
@@ -1137,17 +1152,16 @@
   body.np-gated .wrap,
   body.np-gated footer,
   body.np-gated #cartFab { opacity:0; pointer-events:none; visibility:hidden; }
-  /* al entrar la animación, ya habilitar el catálogo detrás */
+  /* al entrar la animación, ya habilitar el catálogo detrás (footer excluido: usa np-reveal) */
   body.np-unveil .topbar,
   body.np-unveil .filterbar,
   body.np-unveil .wrap,
-  body.np-unveil footer,
   body.np-unveil #cartFab { visibility:visible; pointer-events:auto; }
+  body.np-unveil footer { visibility:visible; pointer-events:auto; }
 
   body.np-unveil .topbar,
   body.np-unveil .filterbar,
   body.np-unveil .wrap,
-  body.np-unveil footer,
   body.np-unveil #cartFab {
     visibility:visible; pointer-events:auto;
     animation:catFadeIn .65s cubic-bezier(.22,.68,0,1) forwards;
@@ -1342,13 +1356,28 @@
   .np-card .index-wrap{ margin:0; }
   .index{ padding-bottom:8px; }
 
-  /* ---- Filtros: barra siempre visible; la marca vive en su propio desplegable ---- */
-  .filterbar{ position:sticky; top:var(--np-tb-h,62px); z-index:45; box-shadow:var(--sh-sm); }
-  #brandMenu.open{ display:flex; flex-wrap:wrap; gap:6px; padding:10px; min-width:260px; }
-  #brandMenu .fbtn{ width:auto; }
+  /* ---- Filtros: barra siempre visible; las marcas van directo en la barra ---- */
+  .filterbar{ position:sticky; top:var(--np-fb-top,var(--np-tb-h,62px)); z-index:45; box-shadow:var(--sh-sm); }
+  .brand-row{ display:flex; flex-wrap:wrap; gap:6px; order:0; flex-basis:100%; width:100%; }
+  .brand-row .fbtn{ width:auto; }
   .filterbar .searchwrap{ flex:1 1 600px; min-width:260px; max-width:none; order:5; }
   .filterbar .view-toggle{ order:6; }
   .filterbar .searchwrap #q{ width:100%; }
+
+  /* ---- Índice de catálogo: panel plegable debajo de la barra de filtros ---- */
+  #idxPill .dd-arrow{ transition:transform .2s var(--ease); }
+  #idxPill.on .dd-arrow{ transform:rotate(180deg); }
+  .idx-panel{
+    max-height:0; overflow:hidden; opacity:0;
+    transition:max-height .35s var(--ease), opacity .3s var(--ease), padding .35s var(--ease);
+    padding:0 40px; background:#fff; border-bottom:0 solid var(--np-line);
+  }
+  .idx-panel.open{ max-height:400px; opacity:1; padding:18px 40px; border-bottom-width:2px; }
+  .idx-panel table.idx{ max-width:520px; }
+  @media (max-width:860px){
+    .idx-panel{ padding:0 14px; }
+    .idx-panel.open{ padding:14px; }
+  }
 
   /* ---- Barra de filtros: estilo limpio blanco ---- */
   .filterbar{
@@ -1505,17 +1534,12 @@ function npMcBadge(){ return ''; }
     </div>
     <div class="hint">💡 Doble clic (o doble toque) sobre cualquier pieza para ver su perfil completo con la foto ampliada.</div>
   <div class="filterbar">
-    <div class="cat-dropdown-wrap">
-      <button class="cat-pill" id="brandPill" onclick="toggleMenu('brandMenu')">
-        &#128269; Marcas<span class="dd-arrow">&#9660;</span>
-      </button>
-      <div class="cat-menu cat-menu-brands" id="brandMenu">
+    <div class="brand-row" id="brandMenu">
     <button class="fbtn active" data-f="all">Todas las marcas <span class="b-count">743</span></button>
     <button class="fbtn has-logo" data-f="Mercedes-Benz"><img class="blogo" src="data:image/png;base64,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" alt="Mercedes-Benz"> <span class="b-count">416</span></button>
     <button class="fbtn has-logo" data-f="Iveco"><img class="blogo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADcAAAAqCAYAAAAXk8MDAAAEvElEQVR42u2XTWhUVxTHf/e9WJpiQ0ImYyTJzMRk/Jh0U9LJIl2IM3aR0PRDEHXRpS4q1A4SzEIQdEogRusq7iyooBsF41dskZJNg4tsulEUnY0QooRUijOZefPevwszj3wr6KK178Dj8d47977zO+fcc+41ksR7KhbvsQRwAVwAF8AFcAFcABfABXABXAD3f4erWvrCdV0kYdu2/2yM8Z9XkoVjjDF4nofneSvqLp1rLV3LsrCsV/6XhOd5rHT8XM0+864Pq57n+Qa9TiRhjHkneivpLIMbHx8nl8vR19dHVVUVV69eJRQK0dvb6xttjPE9aIzh+vXrzMzMkEqliEQi5HI5JicncV0XjAGEweCWyzQ0hEjv/MI35N69ezx58mSRQ4wxFItFOjs7SSQSAExPTzMxMUGpVPLHGmMol8tEIhG6u7uXQ2pePM+TJKXTaQEaGxtTPp9XW1ubAF28eFGSVC6XF93Pnz8vQM3NzXr27Jlu3Lih+vp6ASte8U2b5bquPM/ToUM/yKyiB+jo0aOSpPHxcUUikVX1AB04cEDFYtGfW5L8yFWI+/r6uH37NqOjo/T29nL37l16enrYuHEjk5OT1NfX+6k3PT1NMplkamqKO3fukE6n6e7uZmJigpMnh/ns0w6McbGNhcGmLJeP1teQ7Pqchw8fsmXLFiLRKD+fPo1t274NxhgcxyGRSLBt2zb27dvH5cuXOXbsGMlkknK5vCjSmUyGx48fc//+fbZu3erbV7XSmnFd11+g6XSavXv3cuHCBYaGhhgaGvK/9/f38/TpU/bv3086ncZxHL8A9X3Vw9TLdv74s0D1xx/iGgdvzqPdK5IECnNzGGMIh8Ps2rXrtevJsiy2b9/Ojh07ln0/ceIEuVyOYrG4drVcaeLjx48zNjbGyMgIe/bsobOzkytXrnDp0iWi0SjZbHaR1yXhFAtc+32WX669pCZUS8k4FP8u0fvJC77d2YAxrzzvOg6lUol169YtKwqe52HbNpZl4XkehUIBSYucX6nWlTW4Jlyl/FbC7jgOsViMgYEBDh8+TDab5ezZsxw5cgTXdTl16hThcNhPBcdxsG2bv14UGPy+joHv1mPbFqIaCT6oapj32nxZn0/BpcWgMp9t2xQKBSzLeuW0+exY2D4q8MtaytKCkkqlBOjWrVuSpFKpJNd1lc/n1dHRIUCJREKAdu/e7ReXSoHJ/JgRoMbGRsXjccXbNql9U0yb22OKxVr0zddfynNdzc7OKh6PC1Bra6sikYii0aii0aja2trU1NSkM2fOSJIGBwcFKBQKKRaLqbm5WS0tLWppaVFra6sANTU16fnz5/I8z2dZFrmuri5KpRLhcBjAD391dTXnzp3j4MGDPHr0iJ6eHkZGRvx0qKRj9qcsGxo38Otvv1EszoFAAssYHKdEKBRGQG1tLTdv3mR4eJgHDx74Tbryz0KhQF1dHQD9/f3U1NQwOjpKPp/3o1yJWiqVIpPJEAqFFkX/jZt4ZZAkZmZmCIVCb9Xs37SBv40sg1vYnNfafaymV4nAWruUhetqtX8tfe+67qpzLoziW22/1oL/12+cXxvq/wBUcJ4L4AK4AC6AC+ACuAAugAvg3rX8A5ZJ3puzAF2VAAAAAElFTkSuQmCC" alt="Iveco"> <span class="b-count">111</span></button>
     <button class="fbtn has-logo" data-f="Scania"><img class="blogo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACcAAAAqCAYAAAAwPULrAAAIQ0lEQVR42u2Ya3BU5RnHf+ey902yJLuJiezmBkkagVyUSACVu7EasGoLiI4zlNa2o53KjP3QGTu11dYZO16oTqtOtQ7VQmlLVRgHKSAoN4UQ5JKEIIFwSTa3zWZvZ3fPOW8/EKiMEgO01Q+8H86cL+c9v/e5vc//kYQQgq/pkvkar6twV+Guwn1mqVfy8dkiJDhXjKTzj3MvAkmSLnt/6XLrnDAFkiyN8hAX/mK0wOpoN5eGzWKaJkIIFEWh83QvLS2dtLV+Sk9vD4ZhMsbjobgkQNn4AEWF1+ByWlFV9XMWHw2fOhow3TSIJ1JgQlamk96BIV5+eTV/efMD2j49iZ5IgzAAE5CQFINAYSaNC25i0cI7KSstJJ5I0NMb4tp8HwX5ucMHli7fraYQyJLExi3NPPbYb3nyNz9FkgQ9vUPEYxEsqhVTQCyeIp1KY+oGhpFEtqTREik0LQWSiTvDhaKovLDiJb77vft4+AdLyHJnfCngReGEAAnB0c5+5sx8mEX3zcbr9fP0U6uwO+zkeDNx2C1kOBUcNgtxLYaWDGOxSiRTMQb6I0RjOn19IXQzytJlCxkKh3ln3XqeffZx7v/O7VgtFsRnc2j0cAIDmL/gUdwZ2Xzrnrn85KGXGOMZC7IgHtXw+pycOnmU/v5ebp41gcxMwdtr3sfu8DB2bB69/f0oqgXQiMb7WL78Ifbs2cXx462sfP0FptxQPaL11JEy8Z11W/jkwAFe/P3T/Pxnq3C7shDoIGQMoTG5vpxvzi9ny+at/OLXS7EqKl1dp6maVIWesrB69Tu4rCYCgcOexWt/Wsn3H1xEU9NOVv11LVUTKnDY7RcF/OIiLIFuClY8t4Yl9y9k69a9nDrZjc1mxzQNTCFwOOxs/3Aft82eSqE/gBEDLZzCd62XG6dWs2XLv5AVE0MYGIaJqtgI9cfZu+cQ8+Y18NY/NnPwwNGzxhjtDXHuFPv2tXLqZB/VNZVseHcXWR4nqZSOKUwkkqTlNJ19SV57/e/4nQb2gX4ytUH8Npkj+/ZQ6PPgdmeh62cz2DB1HPYMdu/Yz9ixfqKRBBs2bMM0TWRJ4ouC66KlJNjVz3XXFRAMBgme0cjOzsQwBaqqENMHqCsdw0x3HvljHVQHchh861W0w0d5qKaGoRyFgupynjr+EfLw+YUQyAoMhTVOnz6DP1BAV3eQaDRKZmbmsP2kkeHO+l4wa1YdpRWF/OqJlVhUB5JkIoRJz2AYf8DGsqmluP72Z5x6AGGOx7b3E7I+OUhfexuZd9+JiLjRIiFkpwtx/hoTqIqN1tYWGhfM5dZZ08jIyLjEmEPCblf4xjg/5RV+EskQiXiU4kIXd86uoNJnZcepILsnTyGc66Fz3UaUrhCqxU2uUAl/uJ3KtiaWTK8lntKQh38sSWCicU1+HrW15dTX1yJJ0kWzVb5YjZNlhdPBPqZOm8i8W6sYHOriWEc7U8bls+yWCVTmupB8ORz2l2GrmYLH6UDTLUTsWWTk5uMpClB0XQCH3Yqu68iSTDQaofb6UirKSkgndSRJwhzhalcvlq0AToed5575Hffe+wAnTnxKe/sQj//hbfK8CuPH5zOtyIfnxEFcR44SPBUkUVmBpXYSlrRGvKWNAasVLZ3AIVtJahr5+T4mT65m/fr1zJl5I+dTVbqEfk4aDmBPphu76uGPr7zBgz9chGEMolgVjgcTvL+tncHuOPUWC9KxQyiNc9AWNhJVLMgRDbH/MAW9Ydx2B4aRBlOjoWEGmzdtx0hL5OX5YMRC8iXNpgTMmT2FLRu3MdgX49v3NDDQf5ost0xSJAiH++k/0Y5FlaG1A/fug2Rs3EikaRdmYyOaawx2YSMWT1A/vZZkIsbB5sNUTawk/xrfhW66nE54xswbKCzy8+KKN5g2vQ5vro1EIgxyGj3bjXJDDWZMQWk9hPXdtSSDnRh9CTpcXraiEhqM4M1xM76skPc2bCI7O5cJE0rJ8/nOJ8klw0nS2d6toryYhoabONbRzMd7drL4vjsIhXuwWFT++eEe2j5qJ5rlJTGxmpTNhTxvLiG7RHd3N5s+OoAuJZg2vZbOjpN0dQ1SVOxhxow6FFXFNM0Ru5KR3SpJSMCPH36A4iI/a1e/S7G/hCK/F5HS0VI6CbebE1VlHBtfwpDk4lBOLl3zb2ZfNISIxPD5nOTledm1s5mcbCd3NM5m2tT64YogX77AOWe9ysoATzz5KN3BDnbt2Mld99zOUHiAtKazKRbhSFGAg8dOkMp1sncozcozCh8c60EVaaqqKmhrbScWjXDLjBqWLL4bq9U2YiKMOuZkWcY0TRYvbuC5Fb/k7XVrCBQXUBDwoSg23jsc5M3tR7COu56miireamqhaXcHSC48OZnkeLNpOdTC7LmTWf7IUsrKSjDF6ITPqAWOaZrIsswrr64iPBRhx479rF2zjeycHJANigsK6Az1kNZS2GWVgYFuJlaVUjLOjywUlj+yjLq6GkxTII9SGF2S+joH2B0cZOsHO3n+mTfpPBkkFIoQT0aw2BScFjsutwVvjpuq6jLqbpzE7bfdSnGRf1S64bJ1qyzLCGHi87qpn1pNb1+EwcEkoVAv0ViUpJbA0E0UZLRUhElV5fzowaXDoTF6i12BqJZQFJXsLA+bN25j29aPyS/wIqGQ1tPoaYNQ/wDuLJNly+5ClmUMw0BRlP+fqNZ1g4GBGM37W2ne38yZM0FisRiSkMjLy6GkNJ8F828jOzv7kt15xXCfl5EGhmGg6zoWixVVUa94zyuCG0m5n6v+X8ms5ALI/0x1LmkW8j+dMl3Q/v2XgK4OD6/CfZXr389Gs7ssH727AAAAAElFTkSuQmCC" alt="Scania"> <span class="b-count">78</span></button>
     <button class="fbtn has-logo" data-f="Volvo"><img class="blogo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAHM0lEQVR42u2YW2hU+R3HP+cyM2dumZmMk4yT6NibsUSbVdwnL1HBrQpb+6AQSl98Km7tS6nFl9LHltKnUihIoeDC2pZq4lpwYR8EsVK262VlG6NrQmIuk8vOmcztzJk5l38f4pyNorkZCgv5wR/mzAz/8zn////3/X1/RxJCCL4GIfM1iQ3QDdAN0EXxOoFZifDI/09ISZJe+dvrvl8c6pvevNFoYFkWlmXhui6SJOG6LqqqIkkSqqqiaRqKojA1NYXP5yMQCFCv1xFCYFkWtm2TzWbXH1QIgWEYGIYBgG3bSJKELMtIkoQQAtM0EUIghKBQKKBpGrZtMzQ0RDqdJhqNYpom9XodXdfXH9SyLEqlEo1GAwC/308qlUKSJAzDoNFooKoqoVAI13UxTdMbqqqSTCYpFou0trbSaDRQFIVAILC+W2+aJsViESEEqqoSj8eZnJzk2rVrPHjwgEqlAoDP5yMcDtPV1UVvby/ZbJZarUa9XicWi5HJZDBNk1Ao5K36ciGttNabpkmpVMJxHO8GFy9e5M6dO3R3d7N//346Ozu9LZ2ZmeH+/fs8evSIHTt2cPr0aSKRCLVazUusu3fvkkgkCIVC7N69+81BbdtG13Vc1yUUCqHrOhcuXGDr1q2cP3+eVCq15AP29/czODhIX18fmUwGx3GYnJwkl8tRrVZJJpMcOnTozUCFEOTzeWzbxu/3U6lUOHv2LGfOnOHUqVMvJFNzNKcUQqAoCgDDw8MMDAxw4sQJ0uk0hmEwNTWFpmkUCgUOHjy4tIQtB1qpVMjn8wS0AJFwhHPnznHs2DH6+vqwLMuToaXCcRxPnm7fvs2+ffsIBAKMjY0hSRJ79uxZEnJFgl8ul5EkmZZonKtX+0mn0x6kz+dbkVgrioLrumQyGXp6ehgdHcVxHNra2sjlclQqlRd2YtWgpmliGAayrFAul/jXnVucfe+951u6OmWTZRkhBNu3b0dRfFSrBn6/n3A4zPj4+LKlVF6q9larVWzbIhQKcPfuv0kmE2S3bkW4LrIMruviOI53TqEpNWLRPM8/I3DFQuVqbY2Tz3+JEIJ4PM7s7Oyb6WipVMZxXEyzRjyR5O23D/L54FMMw0QCwsEQvoDK/HyR9rZ2SuUyflWlXm+AEAS0AJZto6o+ZFnCpyz8N9riJ6D5Mc06iqJgGAZCCGRZXhuoYVQXymW1Rjb7DT75dJo//OmP/OZ3v+DmxzcxDSgbNVoiKvgidLQluNb/Eb/69Tn+88mnXP3rTX77+wtcv96PkDWqRoOQJiMcmbM/+SH1hoGsyNTrdWzbxufzre2MLjYZVsPinWMHmJkt8v77HxFLpnAkl3sPHnPk6Dt8cPmfGKbFk2fTBFsTpLZ0MF0w+PNfPqStI4ODn08/G+TI949y6dI/mJ39EkkSIASu6y5bnV4pT4srhyzLBAIaiuwjmUpw69Zjrl79mJ/+7EdsSiX42+UPqZtltn1rG0L4+Py/w6Q3t5JKxYjH2vj75ev8/Jc/JhSM8cGlflzL5rvd2zh8+C0qlSK2Y/P0i2FOnjyJqqprA3348CGlUpl0ejNPhx/zxZMRDuw7gBYM0rAsJFkQCmmYZo1QMIRpWmiB4EKCyQspFAholColFFnBp6gYRo1cbgrXcfj2d77J9Mw0Bb3Au+/+YO3JFAwGmZycJJlM4Pf5KVeKvLXne88zWVqFOGVeWIDZ2Sk0LYRp1jGqNSKRqHfUXpdQS57RtrY2DMOgXK6QSrXRkelgbGwMISTvXAmB54C+un55fOWQarUa8XiCaDSCaZrouk5nZ+eyTl9+XWsghCAWixEIBCgWizQaDTo7OxkaGkKSWFTbeaHOL1y/PCRv3nw+jyzLNBoNz/o1TfMbldBdu3aRy+WwbZtoNIoQgsHBQe9hVuISm1s+Pz+PrusYhoHruoyOjtLV1YXf78d13bU1d02QbDZLIpF4AXZqaoqRkRFvFZswL4/FcxUKBSYmJiiXy9i2zfz8PI7jsHfv3mXFfkUrKoTg8OHD5PN5CoUClmWhKArPnj1jcHCQcrnswbw8AOr1OrlcjomJCXRd94zzyMgIR48eXVKSVu1HJUlienqaK1eusGXLFiKRiFdJwuEwra2ttLS0EAwGURQFx3FwXRfDMNB1nXK5TLVaRZIkHMdhaGiII0eO0N3dvWSmr9rhN2FzuRwDAwOEw2Ha29u946EoCn6/32uLm6DNZGlavWKxyMzMDL29vezcuXPFkKvqmZqwlUqFGzdukMvlSKVSxGIx72au63pJIUkSiqJ4rfXc3ByapnH8+HHa29tXBbkq0Jffdjx58oR79+6h6zqKohAMBQlqQc/R27bt9e3RaJSenh56enqWFfZ1AV3sVZvA+Xye8fFx5ubmvC5VlmUikQibNm2io6ODzZs3r+jVzrqCvg54uVjLKq4L6GLgV0Ev/m4tK7juoBsvcjdAN0AX4n9BATqQmMQlcgAAAABJRU5ErkJggg==" alt="Volvo"> <span class="b-count">138</span></button>
-      </div>
     </div>
       <!-- Ordenar -->
       <div class="cat-dropdown-wrap">
@@ -1553,9 +1577,22 @@ function npMcBadge(){ return ''; }
           <div id="aplMenu"></div>
         </div>
       </div>
+    <button class="cat-pill" id="idxPill" onclick="toggleIndexPanel()">📊 Índice<span class="dd-arrow" id="idxArrow">&#9660;</span></button>
     <button class="cat-pill" id="printCatBtn" onclick="openPrintCatModal()">🖨️ Imprimir catálogo</button>
     <div class="searchwrap"><input id="q" type="search" placeholder="Buscar OEM, cód. fabricante, descripción o nro. equivalente..."></div>
     <div class="view-toggle"><button id="vCards" class="on" onclick="setView('cards')">🔲 Tarjetas</button><button id="vList" onclick="setView('list')">☰ Lista</button></div>
+  </div>
+  <div class="idx-panel" id="idxPanel">
+    <table class="idx">
+      <thead><tr><th>Marca</th><th>Piezas</th><th>Con stock</th><th>A pedido</th></tr></thead>
+      <tbody id="idxBody">
+        <tr><td class="ix-marca"><a href="#Mercedes-Benz">Mercedes-Benz</a></td><td class="ix-num"></td><td class="ix-stk"></td><td class="ix-ped"></td></tr>
+        <tr><td class="ix-marca"><a href="#Iveco">Iveco</a></td><td class="ix-num"></td><td class="ix-stk"></td><td class="ix-ped"></td></tr>
+        <tr><td class="ix-marca"><a href="#Scania">Scania</a></td><td class="ix-num"></td><td class="ix-stk"></td><td class="ix-ped"></td></tr>
+        <tr><td class="ix-marca"><a href="#Volvo">Volvo</a></td><td class="ix-num"></td><td class="ix-stk"></td><td class="ix-ped"></td></tr>
+        <tr class="ix-total"><td>TOTAL</td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
   </div>
     <!-- Gmail selection bar -->
     <div class="sel-bar" id="selBar">
@@ -7051,7 +7088,18 @@ S R G P
       </tr>
       </tbody></table></div>
   </section>
-  <footer><b>next parts</b> · Catálogo mayorista para distribuidores · Precios en USD sujetos a tipo de cambio BNA (referencia $ 1490 / US$)</footer>
+  <footer><b>next parts</b> · Catálogo mayorista para distribuidores · Precios en USD sujetos a tipo de cambio BNA (referencia $ 1490 / US$) · <a href="#" onclick="event.preventDefault();openPrivacyModal()" style="color:inherit;text-decoration:underline">Política de privacidad</a></footer>
+  <div id="npPrivacyOverlay" onclick="if(event.target===this)closePrivacyModal()">
+    <div id="npPrivacyModal">
+      <div class="np-priv-head"><b>Política de privacidad</b><button onclick="closePrivacyModal()" aria-label="Cerrar">&times;</button></div>
+      <div class="np-priv-body">
+        <p>En next parts recopilamos únicamente los datos necesarios para operar el catálogo mayorista: nombre, empresa, email y teléfono de contacto al crear tu cuenta.</p>
+        <p>Usamos esa información para gestionar tu acceso, procesar cotizaciones y comunicarnos sobre stock y precios. No vendemos ni compartimos tus datos con terceros ajenos a la operación comercial.</p>
+        <p>El catálogo utiliza cookies técnicas para mantener tu sesión iniciada. No se emplean cookies de seguimiento publicitario.</p>
+        <p>Podés solicitar la eliminación de tus datos en cualquier momento escribiendo a <a href="mailto:info@nextparts.com.ar" style="color:var(--np-blue)">info@nextparts.com.ar</a>.</p>
+      </div>
+    </div>
+  </div>
 </div>
 <div id="profile">
  <div class="pf-shell">
@@ -7151,6 +7199,22 @@ function toggleNuevos(){
     if(APL_FILTERS.has(v)) APL_FILTERS.delete(v); else APL_FILTERS.add(v);
     document.querySelectorAll('#aplMenu button[data-apl]').forEach(function(b){ b.classList.toggle('active',APL_FILTERS.has(b.dataset.apl)); });
     updateCatPill(); apply();
+  }
+  function openPrivacyModal(){
+    var o=document.getElementById('npPrivacyOverlay');
+    if(o) o.classList.add('show');
+  }
+  function closePrivacyModal(){
+    var o=document.getElementById('npPrivacyOverlay');
+    if(o) o.classList.remove('show');
+  }
+  function toggleIndexPanel(){
+    var panel=document.getElementById('idxPanel');
+    var pill=document.getElementById('idxPill');
+    if(!panel) return;
+    var open=panel.classList.toggle('open');
+    if(pill) pill.classList.toggle('on',open);
+    if(open && typeof updateIndexCounts==='function') updateIndexCounts();
   }
   function closeMenus(){
     document.querySelectorAll('.cat-menu').forEach(function(m){
@@ -9170,11 +9234,13 @@ document.addEventListener('DOMContentLoaded', function(){
         document.body.classList.remove('np-unveil');
         document.body.classList.remove('np-gated');
         try{ window.parent.postMessage({type:'np-gate',visible:false},'*'); }catch(e){}
-        /* forzar visibilidad y clicabilidad de todo el catálogo */
-        ['.topbar','.filterbar','.wrap','footer','#cartFab'].forEach(function(sel){
+        /* forzar visibilidad y clicabilidad de todo el catálogo (footer excluido: usa np-reveal) */
+        ['.topbar','.filterbar','.wrap','#cartFab'].forEach(function(sel){
           var el=document.querySelector(sel);
           if(el){ el.style.opacity='1'; el.style.pointerEvents=''; }
         });
+        var ft=document.querySelector('footer');
+        if(ft){ ft.style.opacity=''; ft.style.pointerEvents=''; }
         /* quitar pointer-events del portal definitivamente */
         g.style.zIndex='-1';
       }, 1050);
@@ -9627,11 +9693,14 @@ function npMcInline(marcaComercial){
   // ---- Medir topbar/filterbar reales (con zoom) para apilar los sticky sin superponerse ----
   function measureBars(){
     var topbar = document.querySelector('.topbar');
+    var lsb = document.getElementById('liveSyncBar');
     var fb = document.querySelector('.filterbar');
     if(!topbar || !fb) return;
     var tbH = topbar.offsetHeight;
+    var lsbH = lsb ? lsb.offsetHeight : 0;
     document.documentElement.style.setProperty('--np-tb-h', tbH + 'px');
-    document.documentElement.style.setProperty('--np-fb-h', (tbH + fb.offsetHeight) + 'px');
+    document.documentElement.style.setProperty('--np-fb-top', (tbH + lsbH) + 'px');
+    document.documentElement.style.setProperty('--np-fb-h', (tbH + lsbH + fb.offsetHeight) + 'px');
   }
   window.addEventListener('load', measureBars);
   window.addEventListener('resize', measureBars);
@@ -9650,8 +9719,8 @@ function npMcInline(marcaComercial){
     if(head) head.setAttribute('aria-expanded', open ? 'true' : 'false');
   };
 
-  // ---- Scroll reveal (mismo espíritu que las animaciones de Jack 3D) ----
-  var targets = document.querySelectorAll('.brand, footer');
+  // ---- Scroll reveal para marcas ----
+  var brandTargets = document.querySelectorAll('.brand');
   if('IntersectionObserver' in window){
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
@@ -9661,11 +9730,27 @@ function npMcInline(marcaComercial){
         }
       });
     }, { threshold:0, rootMargin:'0px 0px -10% 0px' });
-    targets.forEach(function(el, i){
+    brandTargets.forEach(function(el, i){
       el.classList.add('np-reveal');
       el.style.transitionDelay = Math.min(i, 4) * 60 + 'ms';
       io.observe(el);
     });
+  }
+  // ---- Footer: aparece solo cuando entra al viewport ----
+  var ft = document.querySelector('footer');
+  if(ft){
+    ft.classList.add('np-reveal');
+    var footerRevealed = false;
+    function checkFooter(){
+      if(footerRevealed) return;
+      var rect = ft.getBoundingClientRect();
+      if(rect.top < window.innerHeight + 80){
+        ft.classList.add('np-in');
+        footerRevealed = true;
+        window.removeEventListener('scroll', checkFooter);
+      }
+    }
+    window.addEventListener('scroll', checkFooter, {passive:true});
   }
 })();
 </script>
