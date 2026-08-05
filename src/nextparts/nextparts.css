@@ -21,17 +21,27 @@ html {
   scroll-behavior: smooth;
 }
 
-.liquid-glass {
-  background: rgba(255, 255, 255, 0.01);
-  background-blend-mode: luminosity;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+.liquid-glass,
+.glass-card {
   border: none;
   box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
   position: relative;
   overflow: hidden;
 }
-.liquid-glass::before {
+.liquid-glass {
+  background: rgba(255, 255, 255, 0.01);
+  background-blend-mode: luminosity;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+/* Misma apariencia que .liquid-glass pero sin backdrop-filter: para tarjetas
+   que están sobre un fondo plano (sin nada detrás que "esmerilar"), el
+   backdrop-filter no cambia el resultado visual y solo cuesta GPU/CPU. */
+.glass-card {
+  background: rgba(255, 255, 255, 0.06);
+}
+.liquid-glass::before,
+.glass-card::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -62,10 +72,18 @@ html {
 .lava-blob {
   position: absolute;
   border-radius: 9999px;
-  filter: blur(45px);
+  /* El propio radial-gradient ya difumina el borde; un blur más chico
+     alcanza para el efecto "lava lamp" a mucho menor costo de repintado. */
+  filter: blur(24px);
   opacity: 0.6;
   will-change: transform;
   transform: translateZ(0);
+}
+/* Se pausan cuando el Hero sale del viewport (ver NextPartsHero.tsx),
+   para no seguir gastando GPU en un fondo que no se ve durante el
+   scroll a las secciones siguientes. */
+.lava-lamp-bg.paused .lava-blob {
+  animation-play-state: paused;
 }
 .lava-blob-1 {
   top: -10%;

@@ -47,7 +47,7 @@ export default function NextPartsAbout() {
               key={stat.label}
               delay={0.25 + i * 0.1}
               y={24}
-              className="liquid-glass rounded-2xl border border-border/15 px-4 py-8"
+              className="glass-card rounded-2xl border border-border/15 px-4 py-8"
             >
               <div className="text-3xl font-bold sm:text-4xl">{stat.value}</div>
               <div className="mt-2 text-xs text-muted-foreground sm:text-sm">{stat.label}</div>

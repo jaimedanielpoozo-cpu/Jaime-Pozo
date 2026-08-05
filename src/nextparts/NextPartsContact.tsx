@@ -26,7 +26,7 @@ export default function NextPartsContact() {
       <FadeIn
         delay={0.3}
         y={24}
-        className="liquid-glass mt-12 flex w-full max-w-md flex-col gap-6 rounded-2xl border border-border/15 px-8 py-10"
+        className="glass-card mt-12 flex w-full max-w-md flex-col gap-6 rounded-2xl border border-border/15 px-8 py-10"
       >
         <div>
           <div className="text-xs uppercase tracking-widest text-muted-foreground">Email</div>
@@ -49,7 +49,7 @@ export default function NextPartsContact() {
       <FadeIn delay={0.4} y={20}>
         <a
           href="mailto:info@nextparts.com.ar"
-          className="liquid-glass mt-10 inline-block cursor-pointer rounded-full px-14 py-5 text-base text-foreground transition-transform hover:scale-[1.03]"
+          className="glass-card mt-10 inline-block cursor-pointer rounded-full px-14 py-5 text-base text-foreground transition-transform hover:scale-[1.03]"
         >
           Escribinos
         </a>

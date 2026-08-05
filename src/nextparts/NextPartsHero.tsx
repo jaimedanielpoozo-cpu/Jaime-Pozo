@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import logo from '../assets/nextparts-logo.png';
 
 const navLinks = [
@@ -8,9 +9,25 @@ const navLinks = [
 ];
 
 export default function NextPartsHero() {
+  const bgRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = bgRef.current;
+    if (!el || !('IntersectionObserver' in window)) return;
+    // Pausa la animación del fondo cuando el Hero sale de pantalla, para
+    // no seguir gastando GPU en un blur animado que no se está viendo
+    // mientras se scrollea a "Acerca de nosotros" o al catálogo.
+    const io = new IntersectionObserver(
+      ([entry]) => el.classList.toggle('paused', !entry.isIntersecting),
+      { threshold: 0 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
     <section id="home" className="relative min-h-screen overflow-hidden">
-      <div className="lava-lamp-bg absolute inset-0 z-0">
+      <div ref={bgRef} className="lava-lamp-bg absolute inset-0 z-0">
         <span className="lava-blob lava-blob-1" />
         <span className="lava-blob lava-blob-2" />
         <span className="lava-blob lava-blob-3" />
