@@ -8145,34 +8145,7 @@ function generateCatalogPDF(){
   <div class="h"><img src="data:image/png;base64,${NP_LOGO_B64}"><div class="meta"><div style="font-size:20px;font-weight:800;margin-bottom:4px">CATÁLOGO</div>Fecha: ${today}<br>Piezas: ${rows.length}</div></div>
   ${sections}
   <div class="foot">next parts · Catálogo generado el ${today} · Precios en USD · Sujetos a tipo de cambio y disponibilidad de stock</div>
-  
-<!-- ══ MODAL CAMBIO DE CONTRASEÑA v33.0 ══ -->
-<div id="npChangePwModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,18,60,.7);backdrop-filter:blur(6px);align-items:center;justify-content:center">
-  <div style="background:#fff;border-radius:18px;max-width:400px;width:92%;padding:32px 28px;box-shadow:0 24px 60px rgba(0,0,0,.35)">
-    <h3 style="margin:0 0 6px;font-size:18px;color:#012F9E;text-align:center">Cambiar contraseña</h3>
-    <p style="font-size:13px;color:#64748B;text-align:center;margin:0 0 18px">Es tu primer ingreso. Por seguridad, elegí una contraseña nueva.</p>
-    <div style="margin-bottom:12px"><label style="font-size:12px;font-weight:600;color:#334155">Nueva contraseña</label><input id="npNewPw1" type="password" autocomplete="new-password" placeholder="Mínimo 6 caracteres" style="width:100%;padding:10px 12px;border:1.5px solid #CBD5E1;border-radius:10px;font-size:14px;margin-top:4px;box-sizing:border-box"></div>
-    <div style="margin-bottom:16px"><label style="font-size:12px;font-weight:600;color:#334155">Repetir contraseña</label><input id="npNewPw2" type="password" autocomplete="new-password" placeholder="Repetí la contraseña" style="width:100%;padding:10px 12px;border:1.5px solid #CBD5E1;border-radius:10px;font-size:14px;margin-top:4px;box-sizing:border-box"></div>
-    <div id="npChangePwErr" style="display:none;color:#DC2626;font-size:12.5px;text-align:center;margin-bottom:10px"></div>
-    <button id="npChangePwBtn" style="width:100%;padding:12px;border:none;background:#012F9E;color:#fff;font-weight:700;font-size:14px;border-radius:10px;cursor:pointer">Guardar nueva contraseña</button>
-  </div>
-</div>
-<div id="npWelcomeToast"></div>
-
-<!-- ══ POPUP SESIÓN EXPIRADA v33.3 ══ -->
-<div id="npExpiredOverlay">
-  <div id="npExpiredCard">
-    <div class="np-exp-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-      </svg>
-    </div>
-    <h3>Tu sesión ha expirado</h3>
-    <p>Por seguridad, tu sesión se cerró automáticamente.<br>Ingresá nuevamente para continuar operando.</p>
-    <button id="npExpiredBtn">Iniciar sesión</button>
-  </div>
-</div>
-</body></html>`);
+  </body></html>`);
   w.document.close();
   const triggerPrint=()=>{ try{ w.focus(); w.print(); }catch(e){ console.error('Error al imprimir:',e); } finally{ closePrintCatModal(); } };
   try{
@@ -8978,6 +8951,33 @@ document.addEventListener('DOMContentLoaded', function(){
       <button id="npLoginSubmit">Ingresar</button>
       <div class="np-login-note">¿No tenés cuenta? Contactá a NextParts<br>para solicitar acceso mayorista.</div>
     </div>
+  </div>
+</div>
+
+<!-- ══ MODAL CAMBIO DE CONTRASEÑA v33.0 ══ -->
+<div id="npChangePwModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,18,60,.7);backdrop-filter:blur(6px);align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:18px;max-width:400px;width:92%;padding:32px 28px;box-shadow:0 24px 60px rgba(0,0,0,.35)">
+    <h3 style="margin:0 0 6px;font-size:18px;color:#012F9E;text-align:center">Cambiar contraseña</h3>
+    <p style="font-size:13px;color:#64748B;text-align:center;margin:0 0 18px">Es tu primer ingreso. Por seguridad, elegí una contraseña nueva.</p>
+    <div style="margin-bottom:12px"><label style="font-size:12px;font-weight:600;color:#334155">Nueva contraseña</label><input id="npNewPw1" type="password" autocomplete="new-password" placeholder="Mínimo 6 caracteres" style="width:100%;padding:10px 12px;border:1.5px solid #CBD5E1;border-radius:10px;font-size:14px;margin-top:4px;box-sizing:border-box"></div>
+    <div style="margin-bottom:16px"><label style="font-size:12px;font-weight:600;color:#334155">Repetir contraseña</label><input id="npNewPw2" type="password" autocomplete="new-password" placeholder="Repetí la contraseña" style="width:100%;padding:10px 12px;border:1.5px solid #CBD5E1;border-radius:10px;font-size:14px;margin-top:4px;box-sizing:border-box"></div>
+    <div id="npChangePwErr" style="display:none;color:#DC2626;font-size:12.5px;text-align:center;margin-bottom:10px"></div>
+    <button id="npChangePwBtn" style="width:100%;padding:12px;border:none;background:#012F9E;color:#fff;font-weight:700;font-size:14px;border-radius:10px;cursor:pointer">Guardar nueva contraseña</button>
+  </div>
+</div>
+<div id="npWelcomeToast"></div>
+
+<!-- ══ POPUP SESIÓN EXPIRADA v33.3 ══ -->
+<div id="npExpiredOverlay">
+  <div id="npExpiredCard">
+    <div class="np-exp-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+      </svg>
+    </div>
+    <h3>Tu sesión ha expirado</h3>
+    <p>Por seguridad, tu sesión se cerró automáticamente.<br>Ingresá nuevamente para continuar operando.</p>
+    <button id="npExpiredBtn">Iniciar sesión</button>
   </div>
 </div>
 <script>
