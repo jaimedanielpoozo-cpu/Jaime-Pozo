@@ -5,10 +5,10 @@ export default function NextPartsFooter({ visible }: { visible: boolean }) {
   return (
     <footer
       className={`overflow-hidden border-t border-border/15 bg-background transition-[max-height,opacity] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-        visible ? 'max-h-20 opacity-100' : 'max-h-0 opacity-0'
+        visible ? 'max-h-24 opacity-100' : 'max-h-0 opacity-0'
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-2.5 text-xs text-muted-foreground sm:px-10">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4 text-xs text-muted-foreground sm:px-10">
         <div className="flex items-center gap-2">
           <img src={logo} alt="Next Parts" className="h-5 w-5 rounded-md" />
           <span className="hidden sm:inline">Mayorista de repuestos para camiones.</span>
@@ -28,6 +28,9 @@ export default function NextPartsFooter({ visible }: { visible: boolean }) {
           </a>
           <Link to="/politica-de-privacidad" className="transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-foreground">
             Política de Privacidad
+          </Link>
+          <Link to="/aviso-legal" className="transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-foreground">
+            Aviso Legal
           </Link>
         </div>
 
