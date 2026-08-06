@@ -184,26 +184,34 @@ html {
   object-fit: contain;
 }
 
+/* Sin filter:blur() a propósito: es la animación de apertura del Home,
+   corre en simultáneo con la carga de fuentes/JS/imágenes y con el fondo
+   "lava lamp" ya animando — blur ahí fuerza repintados pesados justo
+   cuando el navegador está más ocupado, y se sentía lageado. transform +
+   opacity alcanzan para el mismo efecto y los anima el compositor solo. */
 @keyframes fade-rise {
   from {
     opacity: 0;
-    transform: translateY(28px);
-    filter: blur(6px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
-    filter: blur(0);
   }
 }
+.animate-fade-rise,
+.animate-fade-rise-delay,
+.animate-fade-rise-delay-2 {
+  will-change: transform, opacity;
+}
 .animate-fade-rise {
-  animation: fade-rise 0.9s var(--ease-premium, cubic-bezier(0.16, 1, 0.3, 1)) both;
+  animation: fade-rise 0.7s var(--ease-premium, cubic-bezier(0.16, 1, 0.3, 1)) both;
 }
 .animate-fade-rise-delay {
-  animation: fade-rise 0.9s var(--ease-premium, cubic-bezier(0.16, 1, 0.3, 1)) 0.2s both;
+  animation: fade-rise 0.7s var(--ease-premium, cubic-bezier(0.16, 1, 0.3, 1)) 0.12s both;
 }
 .animate-fade-rise-delay-2 {
-  animation: fade-rise 0.9s var(--ease-premium, cubic-bezier(0.16, 1, 0.3, 1)) 0.4s both;
+  animation: fade-rise 0.7s var(--ease-premium, cubic-bezier(0.16, 1, 0.3, 1)) 0.24s both;
 }
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-rise,
