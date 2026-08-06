@@ -4,7 +4,7 @@ import logo from '../assets/nextparts-logo.png';
 export default function NextPartsFooter({ visible }: { visible: boolean }) {
   return (
     <footer
-      className={`overflow-hidden border-t border-border/15 bg-background transition-[max-height,opacity] duration-500 ease-out ${
+      className={`overflow-hidden border-t border-border/15 bg-background transition-[max-height,opacity] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
         visible ? 'max-h-20 opacity-100' : 'max-h-0 opacity-0'
       }`}
     >
@@ -15,18 +15,18 @@ export default function NextPartsFooter({ visible }: { visible: boolean }) {
         </div>
 
         <div className="flex items-center gap-3 sm:gap-5">
-          <a href="mailto:info@nextparts.com.ar" className="hover:text-foreground">
+          <a href="mailto:info@nextparts.com.ar" className="transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-foreground">
             info@nextparts.com.ar - © 2026 Todos los derechos reservados.
           </a>
           <span className="hidden sm:inline">·</span>
           <span className="hidden sm:inline">Lun a vie 8–18 hs</span>
-          <a href="#nosotros" className="hover:text-foreground">
+          <a href="#nosotros" className="transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-foreground">
             Nosotros
           </a>
-          <a href="#contacto" className="hover:text-foreground">
+          <a href="#contacto" className="transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-foreground">
             Contacto
           </a>
-          <Link to="/politica-de-privacidad" className="hover:text-foreground">
+          <Link to="/politica-de-privacidad" className="transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-foreground">
             Política de Privacidad
           </Link>
         </div>

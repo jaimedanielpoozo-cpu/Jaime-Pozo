@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../nextparts/nextparts.css';
+import FadeIn from '../components/FadeIn';
 import logo from '../assets/nextparts-logo.png';
 
 export default function NextPartsPrivacy() {
@@ -16,17 +17,19 @@ export default function NextPartsPrivacy() {
         </Link>
         <Link
           to="/"
-          className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+          className="text-sm text-muted-foreground transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-foreground"
         >
           ← Volver al inicio
         </Link>
       </nav>
 
       <div className="mx-auto max-w-3xl px-6 pb-24 sm:px-10">
-        <h1 className="text-4xl font-bold leading-none tracking-tight sm:text-5xl">
+        <FadeIn as="h1" y={16} duration={0.6} className="text-4xl font-bold leading-none tracking-tight sm:text-5xl">
           Política de <em className="not-italic text-muted-foreground">Privacidad</em>
-        </h1>
-        <p className="mt-4 text-sm text-muted-foreground">Última actualización: 5 de agosto de 2026</p>
+        </FadeIn>
+        <FadeIn as="p" y={10} delay={0.1} duration={0.6} className="mt-4 text-sm text-muted-foreground">
+          Última actualización: 5 de agosto de 2026
+        </FadeIn>
 
         <p className="mt-8 leading-relaxed text-muted-foreground">
           En Next Parts nos comprometemos a proteger la privacidad de las personas que utilizan
@@ -37,7 +40,7 @@ export default function NextPartsPrivacy() {
           del sitio web{' '}
           <a
             href="https://catalogo-nextparts-1.netlify.app/"
-            className="text-foreground underline hover:text-muted-foreground"
+            className="text-foreground underline transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-muted-foreground"
           >
             https://catalogo-nextparts-1.netlify.app/
           </a>
@@ -69,7 +72,7 @@ export default function NextPartsPrivacy() {
                 Sitio web:{' '}
                 <a
                   href="https://catalogo-nextparts-1.netlify.app/"
-                  className="text-foreground underline hover:text-muted-foreground"
+                  className="text-foreground underline transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-muted-foreground"
                 >
                   https://catalogo-nextparts-1.netlify.app/
                 </a>
@@ -78,7 +81,7 @@ export default function NextPartsPrivacy() {
                 Correo electrónico de contacto:{' '}
                 <a
                   href="mailto:info@nextparts.com.ar"
-                  className="text-foreground underline hover:text-muted-foreground"
+                  className="text-foreground underline transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-muted-foreground"
                 >
                   info@nextparts.com.ar
                 </a>
@@ -423,7 +426,7 @@ export default function NextPartsPrivacy() {
                 Para ejercer estos derechos, el usuario podrá comunicarse con:{' '}
                 <a
                   href="mailto:info@nextparts.com.ar"
-                  className="text-foreground underline hover:text-muted-foreground"
+                  className="text-foreground underline transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-muted-foreground"
                 >
                   info@nextparts.com.ar
                 </a>
@@ -520,7 +523,7 @@ export default function NextPartsPrivacy() {
                 Email:{' '}
                 <a
                   href="mailto:info@nextparts.com.ar"
-                  className="text-foreground underline hover:text-muted-foreground"
+                  className="text-foreground underline transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-muted-foreground"
                 >
                   info@nextparts.com.ar
                 </a>
@@ -529,7 +532,7 @@ export default function NextPartsPrivacy() {
                 Sitio:{' '}
                 <a
                   href="https://catalogo-nextparts-1.netlify.app/"
-                  className="text-foreground underline hover:text-muted-foreground"
+                  className="text-foreground underline transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-muted-foreground"
                 >
                   https://catalogo-nextparts-1.netlify.app/
                 </a>
@@ -547,7 +550,7 @@ export default function NextPartsPrivacy() {
         <div className="mt-16 border-t border-border/15 pt-8">
           <Link
             to="/"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+            className="text-sm text-muted-foreground transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-foreground"
           >
             ← Volver al inicio
           </Link>

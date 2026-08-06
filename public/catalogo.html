@@ -7861,6 +7861,15 @@ function fmtARS(n){ return '$ '+Math.round(n).toLocaleString('es-AR'); }
   function npAttrEsc(s){
     return String(s==null?'':s).replace(/\\/g,'\\\\').replace(/"/g,'\\"');
   }
+  /* Escapa para insertar texto dentro del cuerpo de un documento HTML
+     (document.write, innerHTML). Usado con datos que vienen de un input
+     de texto libre (ej: nombre del cliente en la cotización) para que no
+     se puedan inyectar tags/scripts. */
+  function npHtmlEsc(s){
+    return String(s==null?'':s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
   function npFindTr(key){
     var p=String(key).split('|');
     var marca=p[0], oem=p[1], oct=(p.length>2?p[2]:null);
@@ -8246,7 +8255,7 @@ function printQuote(){
    .foot{margin-top:30px;font-size:11px;color:#9AA3BC;text-align:center;border-top:1px solid #D4DCEC;padding-top:14px}
   </style></head><body>
   <div class="h"><img src="data:image/png;base64,${NP_LOGO_B64}"><div class="meta"><div style="font-size:20px;font-weight:800;margin-bottom:4px">COTIZACIÓN</div>Fecha: ${today}<br>Lista: ${printLabel}</div></div>
-  <div class="info"><div><b>Cliente:</b> ${cliente||'—'}</div><div><b>TC ref. BNA:</b> $ ${TC_REF} / US$</div><div><b>Ítems:</b> ${keys.length}</div><div><b>Precios:</b> SIN IVA</div></div>
+  <div class="info"><div><b>Cliente:</b> ${npHtmlEsc(cliente)||'—'}</div><div><b>TC ref. BNA:</b> $ ${TC_REF} / US$</div><div><b>Ítems:</b> ${keys.length}</div><div><b>Precios:</b> SIN IVA</div></div>
   <table><thead><tr><th>#</th><th>OEM</th><th>CINPAL</th><th>Descripción</th><th>Marca</th><th>Cant.</th><th>P. USD</th><th>P. unit. ARS</th>${anyDisc?'<th>Desc.</th>':''}<th>Subtotal ARS</th></tr></thead><tbody>${body}</tbody></table>
   ${(grossARS-netARS>0.5||GEN_DISC>0)?`<div style="text-align:right;font-size:13px;color:#5A6580;margin-top:14px;line-height:1.7">
     ${grossARS-netARS>0.5?`Subtotal: ${fmtARS(grossARS)}<br><span style="color:#C0455E">Descuentos por pieza: − ${fmtARS(grossARS-netARS)}</span><br>`:''}

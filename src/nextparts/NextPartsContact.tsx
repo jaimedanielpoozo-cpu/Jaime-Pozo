@@ -9,6 +9,7 @@ export default function NextPartsContact() {
       <FadeIn
         as="h2"
         y={40}
+        blur
         className="text-4xl font-bold leading-none tracking-tight sm:text-6xl md:text-7xl"
       >
         Contact<em className="not-italic text-muted-foreground">o</em>
@@ -32,7 +33,7 @@ export default function NextPartsContact() {
           <div className="text-xs uppercase tracking-widest text-muted-foreground">Email</div>
           <a
             href="mailto:info@nextparts.com.ar"
-            className="mt-2 block text-lg text-foreground transition-colors hover:text-muted-foreground"
+            className="mt-2 block text-lg text-foreground transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-muted-foreground"
           >
             info@nextparts.com.ar
           </a>
@@ -49,7 +50,7 @@ export default function NextPartsContact() {
       <FadeIn delay={0.4} y={20}>
         <a
           href="mailto:info@nextparts.com.ar"
-          className="glass-card mt-10 inline-block cursor-pointer rounded-full px-14 py-5 text-base text-foreground transition-transform hover:scale-[1.03]"
+          className="glass-card mt-10 inline-block cursor-pointer rounded-full px-14 py-5 text-base text-foreground transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.04] hover:shadow-xl active:scale-[0.97]"
         >
           Escribinos
         </a>

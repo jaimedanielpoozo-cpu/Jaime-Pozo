@@ -45,7 +45,7 @@ export default function NextPartsHero() {
               className={
                 i === 0
                   ? 'text-sm text-foreground'
-                  : 'text-sm text-muted-foreground transition-colors hover:text-foreground'
+                  : 'text-sm text-muted-foreground transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-foreground'
               }
             >
               {link.label}
@@ -55,7 +55,7 @@ export default function NextPartsHero() {
 
         <a
           href="#catalogo"
-          className="liquid-glass cursor-pointer rounded-full px-6 py-2.5 text-sm text-foreground transition-transform hover:scale-[1.03]"
+          className="liquid-glass cursor-pointer rounded-full px-6 py-2.5 text-sm text-foreground transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.04] hover:shadow-lg active:scale-[0.97]"
         >
           Ver catálogo
         </a>
@@ -78,7 +78,7 @@ export default function NextPartsHero() {
 
         <a
           href="#catalogo"
-          className="liquid-glass animate-fade-rise-delay-2 mt-12 cursor-pointer rounded-full px-14 py-5 text-base text-foreground transition-transform hover:scale-[1.03]"
+          className="liquid-glass animate-fade-rise-delay-2 mt-12 cursor-pointer rounded-full px-14 py-5 text-base text-foreground transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.04] hover:shadow-xl active:scale-[0.97]"
         >
           Ver catálogo
         </a>
