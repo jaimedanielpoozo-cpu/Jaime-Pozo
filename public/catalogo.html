@@ -74,7 +74,7 @@
     background:#fff; padding:8px 40px; border-bottom:1px solid var(--np-line);
     box-shadow:0 2px 8px rgba(20,52,118,.04);
   }
-  .index h2 { color:var(#fff); font-size:25px; font-weight:800; letter-spacing:-.3px; }
+  .index h2 { color:var(--np-ink); font-size:25px; font-weight:800; letter-spacing:-.3px; }
   .index .note { color:var(--np-grey); font-size:13px; margin:7px 0 22px; }
   table.idx { width:100%; border-collapse:separate; border-spacing:0; max-width:640px; border-radius:14px; overflow:hidden;
     box-shadow:var(--sh-md), 0 0 0 1px var(--np-line); }
@@ -995,11 +995,16 @@
     display:flex;align-items:center;justify-content:center;padding:20px;
     overflow:hidden;
   }
+  /* Sin filter:blur(): con will-change:opacity,transform de abajo, el blur
+     forzaba una capa GPU pesada justo en el primer render de la pantalla
+     de acceso (arranca en simultáneo con la carga del catálogo) — eso
+     tiraba abajo Safari en iPhone. El propio radial-gradient ya da el
+     borde difuminado, sin costo de repintado. */
   #npGate::before,#npGate::after{
-    content:'';position:absolute;border-radius:50%;filter:blur(70px);opacity:.35;
+    content:'';position:absolute;border-radius:50%;opacity:.35;
   }
-  #npGate::before{width:520px;height:520px;background:#0040CC;left:-140px;top:-120px}
-  #npGate::after{width:420px;height:420px;background:#012F9E;right:-100px;bottom:-140px}
+  #npGate::before{width:520px;height:520px;background:radial-gradient(circle,#0040CC 0%,transparent 70%);left:-140px;top:-120px}
+  #npGate::after{width:420px;height:420px;background:radial-gradient(circle,#012F9E 0%,transparent 70%);right:-100px;bottom:-140px}
   .gate-wrap{
     position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;
     gap:60px;align-items:center;width:min(880px,94vw);
