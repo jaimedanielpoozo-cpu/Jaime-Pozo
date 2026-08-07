@@ -1311,7 +1311,10 @@
 
   /* ---- Detalle de bordes / profundidad general ---- */
   .wrap{ border-radius:22px; overflow:hidden; }
-  .topbar{ backdrop-filter:blur(10px); border-bottom:1px solid rgba(255,255,255,.08); }
+  /* Sin backdrop-filter: .topbar es sticky y queda blureando todo el scroll,
+     con ~800 imágenes de productos abajo — en iPhone eso satura memoria y
+     Safari cierra la pestaña sola. */
+  .topbar{ border-bottom:1px solid rgba(255,255,255,.08); }
   table.idx, table.parts{ border:1px solid var(--np-line); }
   .brand-bar{ border:1px solid rgba(255,255,255,.08); border-bottom:none; }
   .fbtn, .cat-pill, .view-toggle, .searchwrap input{ border-width:1.5px; }
