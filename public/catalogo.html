@@ -8994,7 +8994,7 @@ document.addEventListener('DOMContentLoaded', function(){
 (function(){
   var SB_URL = 'https://sjxyeziwvbjeotybxsyn.supabase.co';
   var SB_KEY = 'sb_publishable_XHaTPvSFNBATCdhN0d5jSA_EW30HZgD';
-  var SESSION_HOURS = 8; /* v33.8: máx 8h — no subir sin revisar seguridad */
+  var SESSION_HOURS = 4;
   var LS_KEY = 'np_session';
 
   function getSession(){
@@ -9320,7 +9320,7 @@ document.addEventListener('DOMContentLoaded', function(){
       var perfil=await fetchPerfil(j.access_token);
       if(!perfil){ err('Tu cuenta no tiene perfil asignado. Contactá a NextParts.'); btn.disabled=false; btn.textContent='Acceder'; return; }
       if(!perfil.activo){ err('Tu cuenta está desactivada. Contactá a NextParts.'); btn.disabled=false; btn.textContent='Acceder'; return; }
-      var hours=document.getElementById('gateRemember').checked ? 24*30 : 8;
+      var hours=document.getElementById('gateRemember').checked ? 24*30 : 4;
       localStorage.setItem(LS, JSON.stringify({
         token:j.access_token, email:email, perfil:perfil,
         exp:Date.now()+hours*3600*1000
