@@ -9225,8 +9225,35 @@ document.addEventListener('DOMContentLoaded', function(){
     document.body.classList.toggle('perfil-pvp', !!(p&&p.tipo==='pvp'));
   }
 
+  /* Portada de bienvenida (.cover): una vez que el usuario scrollea más
+     allá y la topbar/filterbar quedan fijas arriba, se oculta la portada
+     para que no se pueda volver a subir a verla — hasta que cierre sesión
+     y vuelva a entrar. */
+  var _npCoverLocked = false;
+  function armCoverLock(){
+    var cover = document.querySelector('.cover');
+    if(!cover || _npCoverLocked) return;
+    function checkCoverScroll(){
+      if(_npCoverLocked) return;
+      if(cover.getBoundingClientRect().bottom <= 0){
+        cover.style.display = 'none';
+        _npCoverLocked = true;
+        window.removeEventListener('scroll', checkCoverScroll);
+      }
+    }
+    window.addEventListener('scroll', checkCoverScroll, {passive:true});
+  }
+  function disarmCoverLock(){
+    var cover = document.querySelector('.cover');
+    if(cover) cover.style.display = '';
+    _npCoverLocked = false;
+  }
+
   function showGate(){
     var g=document.getElementById('npGate');
+    /* al cerrar sesión (o volver a abrir el portal), la portada vuelve a estar disponible */
+    disarmCoverLock();
+    window.scrollTo(0,0);
     /* resetear todos los estilos que hideGate pudo haber dejado */
     g.classList.remove('entering');
     g.style.cssText=''; /* limpiar todos los estilos inline */
@@ -9281,11 +9308,15 @@ document.addEventListener('DOMContentLoaded', function(){
         if(ft){ ft.style.opacity=''; ft.style.pointerEvents=''; }
         /* quitar pointer-events del portal definitivamente */
         g.style.zIndex='-1';
+        window.scrollTo(0,0);
+        armCoverLock();
       }, 1050);
     } else {
       g.style.display='none';
       document.body.classList.remove('np-gated');
       try{ window.parent.postMessage({type:'np-gate',visible:false},'*'); }catch(e){}
+      window.scrollTo(0,0);
+      armCoverLock();
     }
   }
 
